@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Cambiar contraseña</title>
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+        <div class="wrapper">
+            <h1>Nueva contraseña</h1>
+            <p>Ingresa tu nueva contraseña</p>
+            <form action="php/Cambiar_contrasena.php" method="post">
+                <input type="password" name="contrasena" placeholder="Nueva contraseña">
+                <input type="password" name="repetir_contrasena" placeholder="Repetir contraseña">
+                <button>Cambiar contraseña</button>
+                <closeform></closeform>
+            </form>
+            
+            <div class="not-member">
+                ¿No estas registrado?<a href="/php/Registro_de_usuario.php"> Registrate ahora</a>
+            </div>
+            <div class="not-member">
+                <a href="index.html">Pagina principal</a>
+            </div>
+        </div>
+    </body>
+</html>
