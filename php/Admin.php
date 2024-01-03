@@ -10,9 +10,14 @@ if (!isset($_SESSION['usuario_id']) || !isset($_SESSION['es_admin']) || $_SESSIO
 }
 
 // Obtener todos los usuarios
-$records = $conn->prepare('SELECT id, boleta, usuario, email, es_admin FROM usuarios');
-$records->execute();
-$usuarios = $records->fetchAll(PDO::FETCH_ASSOC);
+$recordsUsuarios = $conn->prepare('SELECT id, boleta, usuario, email, es_admin FROM usuarios');
+$recordsUsuarios->execute();
+$usuarios = $recordsUsuarios->fetchAll(PDO::FETCH_ASSOC);
+
+// Obtener todas las solicitudes
+$recordsSolicitudes = $conn->prepare('SELECT id, boleta, nombre, apellido_pat, apellido_mat, status FROM datos_justificante');
+$recordsSolicitudes->execute();
+$solicitudes = $recordsSolicitudes->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -23,6 +28,14 @@ $usuarios = $records->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="../css/styleIndex.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
     <title>Admin Panel</title>
+    <style>
+        table {
+            margin: auto; /* Centra la tabla */
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
 </head>
 <body>
     <main class="main">
@@ -45,48 +58,89 @@ $usuarios = $records->fetchAll(PDO::FETCH_ASSOC);
             </header>
             <div class="banner">
                 <div class="banner_textos">
-                    <h2>Listado de Usuarios</h2>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Boleta</th>
-                                <th>Usuario</th>
-                                <th>Email</th>
-                                <th>Es_Admin</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach ($usuarios as $usuario): ?>
+                    <button onclick="toggleSection('usuariosSection')">Mostrar Usuarios</button>
+                    <button onclick="toggleSection('solicitudesSection')">Mostrar Solicitudes</button>
+
+                    <div id="usuariosSection" class="hidden">
+                        <h2>Listado de Usuarios</h2>
+                        <table>
+                            <thead>
                                 <tr>
-                                    <td><?= $usuario['id'] ?></td>
-                                    <td><?= $usuario['boleta'] ?></td>
-                                    <td><?= $usuario['usuario'] ?></td>
-                                    <td><?= $usuario['email'] ?></td>
-                                    <td><?= $usuario['es_admin'] ?></td>
-                                    <td>
-                                        <button onclick="eliminarUsuario(<?= $usuario['id'] ?>)">Eliminar</button>
-                                        <button onclick="editarUsuario(<?= $usuario['id'] ?>)">Editar</button>
-                                    </td>
+                                    <th>ID</th>
+                                    <th>Boleta</th>
+                                    <th>Usuario</th>
+                                    <th>Email</th>
+                                    <th>Es_Admin</th>
+                                    <th>Acciones</th>
                                 </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($usuarios as $usuario): ?>
+                                    <tr>
+                                        <td><?= $usuario['id'] ?></td>
+                                        <td><?= $usuario['boleta'] ?></td>
+                                        <td><?= $usuario['usuario'] ?></td>
+                                        <td><?= $usuario['email'] ?></td>
+                                        <td><?= $usuario['es_admin'] ?></td>
+                                        <td>
+                                            <button onclick="eliminarUsuario(<?= $usuario['id'] ?>)">Eliminar</button>
+                                            <button onclick="editarUsuario(<?= $usuario['id'] ?>)">Editar</button>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="solicitudesSection" class="hidden">
+                        <h2>Listado de Solicitudes</h2>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Boleta</th>
+                                    <th>Nombre</th>
+                                    <th>Apellido Paterno</th>
+                                    <th>Apellido Materno</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($solicitudes as $solicitud): ?>
+                                    <tr>
+                                        <td><?= $solicitud['id'] ?></td>
+                                        <td><?= $solicitud['boleta'] ?></td>
+                                        <td><?= $solicitud['nombre'] ?></td>
+                                        <td><?= $solicitud['apellido_pat'] ?></td>
+                                        <td><?= $solicitud['apellido_mat'] ?></td>
+                                        <td><?= $solicitud['status'] ?></td>
+                                        <td>
+                                            <button onclick="aprobarSolicitud(<?= $solicitud['id'] ?>)">Aprobar</button>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
     
     <script>
+        function toggleSection(sectionId) {
+            var section = document.getElementById(sectionId);
+            section.style.display = section.style.display === 'none' ? 'block' : 'none';
+        }
+        
         function eliminarUsuario(userId) {
-            // Aquí puedes implementar la lógica para eliminar el usuario con el ID userId
+            // Implementa la lógica para eliminar el usuario con el ID userId
             console.log('Eliminar usuario con ID: ' + userId);
         }
 
         function editarUsuario(userId) {
             // Redirige a editar.php con el ID del usuario
-            window.location.href = 'Editar.php?id=' + userId;
+            window.location.href = 'EditarUsuario.php?id=' + userId;
         }
     </script>
 </body>
