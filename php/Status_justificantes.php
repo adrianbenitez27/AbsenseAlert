@@ -2,33 +2,16 @@
     require 'Conexion_base_de_datos.php';
     session_start();
 
-    if (!empty($_POST['correo_electronico']) && !empty($_POST['contrasena'])){
-        $records = $conn->prepare('SELECT id,boleta,usuario,email,contrasena FROM usuarios WHERE email=:correo_electronico');
-        $records->bindParam(':correo_electronico',$_POST['correo_electronico']);
-        $records->execute();
-        $resultado = $records->fetch(PDO::FETCH_ASSOC);
-        $mensaje='';
-        $contrasena=hash('sha256', $_POST['contrasena']);
-        if(!empty($resultado['usuario']) && ($contrasena == $resultado['contrasena'])){
-            $_SESSION['usuario_id'] = $resultado['id'];
-            $_SESSION['usuario'] = $resultado['usuario'];
-        }else{
-            echo "<script>alert('No existe algún usuario con este correo electrónico'); 
-                window.location='../index.html'</script>";
-        }
-    }
     if(isset($_SESSION['usuario_id'])){
-        $records=$conn->prepare('SELECT id,boleta,usuario,email,contrasena FROM usuarios WHERE id=:id');
+        //$records=$conn->prepare('SELECT id,boleta,usuario,email,contrasena FROM usuarios WHERE id=:id');
+        $records=$conn->prepare('SELECT id,boleta,nombre,apellido_pat,apellido_mat,fecha_nac,genero,curp,
+        direccion,colonia,estado_proce,codigo_postal,telefono,email,escuela_proce,fecha_ini,fecha_fin,razon_ausen,
+        archivo_com_med,status,fecha_jus FROM datos_justificante WHERE id=:id');
         $records->bindParam(':id', $_SESSION['usuario_id']);
         $records->execute();
-        $results = $records->fetch(PDO::FETCH_ASSOC);
-        $user = null;
-        if(count($results) > 0){
-            $user=$results;
-        }
+        //$resultado = $records->fetch(PDO::FETCH_ASSOC);
     }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -37,7 +20,28 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../css/styleIndex.css">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
-        <title>Inicio AbsenseAlert</title>
+        <title>Status justificantes</title>
+        <style>
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: 20px auto;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+        .scrollable {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        </style>
     </head>
     <body>
         <main class="main">
@@ -48,26 +52,40 @@
                     </div>
                     <nav class="navegacion">
                         <a href="index.php" class="link">Inicio</a>
-
-                        <?php if(!empty($user)): ?>
-                            <a class="link"><?= $user['usuario'] ?></a>
-                            <a href="Cerrar_sesion.php" class="link">Cerrar sesion</a>
-                            <a href="Formulario.php" class="link">Solicitar justificante</a>
-                            <a href="Status_justificantes.php" class="link">Revisar status de justificantes</a>
-                        <?php else: ?>    
-                            <a href="Inicio_de_sesion.php" class="link">Accede a tu cuenta</a>
-                            <a href="Registro_de_usuario.php" class="link">Crear una cuenta</a>
-                        <?php endif;?>
+                        <a class="link"><?= $_SESSION['usuario'] ?></a>
+                        <a href="Cerrar_sesion.php" class="link">Cerrar sesion</a>
+                        <a href="Formulario.php" class="link">Solicitar justificante</a>
+                        <a href="Status_justificantes.php" class="link">Revisar status de justificantes</a>
                     </nav>
                 </header>
-                <div class="banner">
-                    <div class="banner_textos">
-                        <h1>El precio es música para sus oídos</h1>
-                        <p>Musescom es una plataforma para crear creadores de musica y 
-                            para aquellos que quieren comenzar.</p>
-                            <a href="Cursos.html">Ver los cursos</a>
-                    </div>
-                </div>
+                <h1>Status de justificantes médicos</h1>
+                <?php
+                    echo '<div class="scrollable">';
+                        echo '<table border="1">';
+                            echo '<tr>';
+                                echo '<th>Contador</th>';
+                                echo '<th>Fecha</th>';
+                                echo '<th>Status</th>';
+                                echo '<th>Archivo</th>';
+                            echo '</tr>';
+                            $cont = 1;
+                            while ($row = $records->fetch(PDO::FETCH_ASSOC)) {
+                                echo '<tr>';
+                                    echo '<td>' . $cont . '</td>';
+                                    echo '<td>' . $row['fecha_jus'] . '</td>';
+                                    echo '<td>' . $row['status'] . '</td>';
+                                    if($row['status'] == "Pendiente"){
+                                        echo '<td>' . 'Aún no se ha revisado tu información' . '</td>';
+                                    }
+                                    else if($row['status'] == "Rechazado"){
+                                        echo '<td>' . 'Tu información no cumplió las especificaciones' . '</td>';
+                                    }
+                                echo '</tr>';
+                                $cont++;
+                            }
+                        echo '</table>';
+                    echo '</div>';
+                ?>
             </section>
             <section class="contenedor-2">
                 <div class="text">

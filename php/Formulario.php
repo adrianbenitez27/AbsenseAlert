@@ -22,8 +22,8 @@
                 correo_electronico: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
                 telefono: /^\d{10}$/,
                 curp: /^[A-Z]{4}\d{6}[A-Z]{6}[A-Z0-9]\d{1}$/,
-                direccion: /^[a-zA-ZÀ-ÿ.\s]{1,40}$/,
-                colonia: /^[a-zA-ZÀ-ÿ.\s]{1,40}$/,
+                direccion: /^[a-zA-ZÀ-ÿ.\s0-9#]{1,100}$/,
+                colonia: /^[a-zA-ZÀ-ÿ.\s0-9#]{1,100}$/,
                 cp: /^\d{5}$/
             };
 

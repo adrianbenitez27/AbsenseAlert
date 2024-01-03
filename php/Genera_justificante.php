@@ -1,6 +1,7 @@
 <?php 
     session_start();
     require 'Conexion_base_de_datos.php';
+    date_default_timezone_set('America/Mexico_City');
 
     $_SESSION['usuario_id'];
 
@@ -14,9 +15,9 @@
     if(!empty($resultado['usuario']) && move_uploaded_file($_FILES['archivo_com_med']['tmp_name'], $ruta_archivo)){
         $sql = "INSERT INTO datos_justificante (id, boleta, nombre, apellido_pat, apellido_mat, fecha_nac, genero, curp, 
         direccion, colonia, estado_proce, codigo_postal, telefono, email, escuela_proce, fecha_ini, fecha_fin, 
-        razon_ausen, archivo_com_med) VALUES (:id, :boleta, :nombre, :apellido_pat, :apellido_mat, :fecha_nac, :genero, :curp, 
+        razon_ausen, archivo_com_med, status, fecha_jus) VALUES (:id, :boleta, :nombre, :apellido_pat, :apellido_mat, :fecha_nac, :genero, :curp, 
         :direccion, :colonia, :estado_proce, :codigo_postal, :telefono, :correo_electronico, :escuela_proce, :fecha_ini, 
-        :fecha_fin, :razon_ausen, :archivo_com_med)";
+        :fecha_fin, :razon_ausen, :archivo_com_med, :status, :fecha_jus)";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':id', $_SESSION['usuario_id']);       
         $stmt->bindParam(':boleta', $_POST['boleta']);
@@ -37,6 +38,8 @@
         $stmt->bindParam(':fecha_fin', $_POST['fecha_fin']);
         $stmt->bindParam(':razon_ausen', $_POST['razon_ausen']);
         $stmt->bindParam(':archivo_com_med', $ruta_archivo);
+        $stmt->bindValue(':status', "Pendiente");
+        $stmt->bindValue(':fecha_jus', date('Y-m-d H:i:s'));
 
         if ($stmt->execute()){
             echo "<script>alert('Justificante ingresado correctamente'); 
