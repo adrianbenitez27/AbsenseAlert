@@ -3,7 +3,7 @@
     session_start();
 
     if (!empty($_POST['correo_electronico']) && !empty($_POST['contrasena'])){
-        $records = $conn->prepare('SELECT id,boleta,usuario,email,contrasena FROM usuarios WHERE email=:correo_electronico');
+        $records = $conn->prepare('SELECT id, boleta, usuario, email, contrasena, es_admin FROM usuarios WHERE email=:correo_electronico');
         $records->bindParam(':correo_electronico',$_POST['correo_electronico']);
         $records->execute();
         $resultado = $records->fetch(PDO::FETCH_ASSOC);
@@ -12,6 +12,7 @@
         if(!empty($resultado['usuario']) && ($contrasena == $resultado['contrasena'])){
             $_SESSION['usuario_id'] = $resultado['id'];
             $_SESSION['usuario'] = $resultado['usuario'];
+            $_SESSION['es_admin'] = $resultado['es_admin'];
         }else{
             echo "<script>alert('No existe algún usuario con este correo electrónico'); 
                 window.location='../index.html'</script>";
@@ -54,6 +55,9 @@
                             <a href="Cerrar_sesion.php" class="link">Cerrar sesion</a>
                             <a href="Formulario.php" class="link">Solicitar justificante</a>
                             <a href="Status_justificantes.php" class="link">Revisar status de justificantes</a>
+                            <?php if ($_SESSION['es_admin'] == 1): ?>
+                                <a href="Admin.php" class="link">Admin</a>
+                            <?php endif; ?>
                         <?php else: ?>    
                             <a href="Inicio_de_sesion.php" class="link">Accede a tu cuenta</a>
                             <a href="Registro_de_usuario.php" class="link">Crear una cuenta</a>
