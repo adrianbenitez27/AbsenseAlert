@@ -63,15 +63,16 @@ CREATE TABLE `usuarios` (
   `usuario` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   `contrasena` varchar(50) NOT NULL
+  `es_admin` tinyint(1) NOT NULL DEFAULT 0;
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `boleta`, `usuario`, `email`, `contrasena`) VALUES
-(0, '0000000000', 'Administrador', 'administrador@ipn.mx', '099f661a1a6c901146ed8e12ee060fe98aa2334d841255684618f90219621d6e'),
-(1, '2021630122', 'adrianben', 'adriankoala7@gmail.com', '099f661a1a6c901146ed8e12ee060fe98aa2334d841255684618f90219621d6e');
+INSERT INTO `usuarios` (`id`, `boleta`, `usuario`, `email`, `contrasena`,`es_admin`) VALUES
+(0, '0000000000', 'Administrador', 'administrador@ipn.mx', '099f661a1a6c901146ed8e12ee060fe98aa2334d841255684618f90219621d6e',`1`),
+(1, '2021630122', 'adrianben', 'adriankoala7@gmail.com', '099f661a1a6c901146ed8e12ee060fe98aa2334d841255684618f90219621d6e',`0`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
