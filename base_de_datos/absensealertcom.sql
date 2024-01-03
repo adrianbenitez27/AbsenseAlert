@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-01-2024 a las 17:59:13
+-- Tiempo de generación: 04-01-2024 a las 00:40:51
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -62,17 +62,18 @@ CREATE TABLE `usuarios` (
   `boleta` varchar(10) NOT NULL,
   `usuario` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `contrasena` varchar(50) NOT NULL
-  `es_admin` tinyint(1) NOT NULL DEFAULT 0;
+  `contrasena` varchar(64) NOT NULL,
+  `es_admin` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `boleta`, `usuario`, `email`, `contrasena`,`es_admin`) VALUES
-(0, '0000000000', 'Administrador', 'administrador@ipn.mx', '099f661a1a6c901146ed8e12ee060fe98aa2334d841255684618f90219621d6e',`1`),
-(1, '2021630122', 'adrianben', 'adriankoala7@gmail.com', '099f661a1a6c901146ed8e12ee060fe98aa2334d841255684618f90219621d6e',`0`);
+INSERT INTO `usuarios` (`id`, `boleta`, `usuario`, `email`, `contrasena`, `es_admin`) VALUES
+(0, '0000000000', 'Administrador', 'administrador@ipn.mx', '099f661a1a6c901146ed8e12ee060fe98aa2334d841255684618f90219621d6e', 1),
+(1, '2021630122', 'adrianben', 'adriankoala7@gmail.com', '099f661a1a6c901146ed8e12ee060fe98aa2334d841255684618f90219621d6e', 0),
+(2, '2021630738', 'LuisT', 'luiseishon9@gmail.com', '89a2bc21447378ea24ef8fab0209aa807ccc8fd3e770bc0f2f85574abbb079ce', 0);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
