@@ -4,14 +4,15 @@
     date_default_timezone_set('America/Mexico_City');
 
     $_SESSION['usuario_id'];
-
+    echo 'ID de la sesión: ' . $usuario_id . PHP_EOL;
     $records = $conn->prepare('SELECT id,boleta,usuario,email,contrasena FROM usuarios WHERE id=:id');
     $records->bindParam(':id',$_SESSION['usuario_id']);
     $records->execute();
     $resultado = $records->fetch(PDO::FETCH_ASSOC);
 
     $ruta_archivo = '../justificantes_medicos/' . $_SESSION['usuario_id'] . '-' . $_FILES['archivo_com_med']['name'];
-    
+    echo 'ID de la consulta: ' . $resultado['id'] . PHP_EOL;
+    echo "<script>alert('Justificante ingresado correctamente'); 
     if(!empty($resultado['usuario']) && move_uploaded_file($_FILES['archivo_com_med']['tmp_name'], $ruta_archivo)){
         $sql = "INSERT INTO datos_justificante (id, boleta, nombre, apellido_pat, apellido_mat, fecha_nac, genero, curp, 
         direccion, colonia, estado_proce, codigo_postal, telefono, email, escuela_proce, fecha_ini, fecha_fin, 
