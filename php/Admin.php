@@ -25,21 +25,24 @@ $solicitudes = $recordsSolicitudes->fetchAll(PDO::FETCH_ASSOC);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/styleIndex.css">
+    <link rel="shortcut icon" href="#" /> 
+    <!-- <link rel="stylesheet" href="../css/styleIndex.css"> -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
     <title>Admin Panel</title>
     <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
-    <style>
+
+    <link rel="stylesheet" type="text/css" href="../datatables/datatables.min.js">
+    <link rel="stylesheet" type="text/css" href="../datatables/DataTables-1.13.8/css/dataTables.bootstrap5.min.css">
+    <!-- <style>
         table {
             margin: auto; /* Centra la tabla */
         }
         .hidden {
             display: none;
         }
-    </style>
+    </style> -->
 </head>
 <body>
-
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
@@ -58,7 +61,6 @@ $solicitudes = $recordsSolicitudes->fetchAll(PDO::FETCH_ASSOC);
         </nav>
     </header>
 
-    <main>
         <div class="container my-3">
             <div class="row">
                 <div class="col-lg-12">            
@@ -70,46 +72,48 @@ $solicitudes = $recordsSolicitudes->fetchAll(PDO::FETCH_ASSOC);
     <div class="container my-3">
         <div class="row">
             <div class="col-lg-12">
-                <table id="tablaUsuarios" class="table table-striped table-bordered table-condensed">  <!-- Tabla de usuarios falta el class -->
-                    <thead class="text-center">
-                        <tr>
-                            <th>Id</th>
-                            <th>Boleta</th>
-                            <th>Usuario</th>
-                            <th>email</th>
-                            <th>Rol</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <?php foreach ($usuarios as $usuario){ ?>
-                        <tr>
-                            <td><?= $usuario['id'] ?></td>
-                            <td><?= $usuario['boleta'] ?></td>
-                            <td><?= $usuario['usuario'] ?></td>
-                            <td><?= $usuario['email'] ?></td>
-                            <td><?= $usuario['es_admin'] ?></td>
-                            <td>
-                                <!-- <div class="text-center">
-                                    <div class="btn-group">
-                                        <button class="btn btn-primary btnEditar">Editar</button>
-                                        <button class="btn btn-danger btnBorrar">Borrar</button>
-                                    </div>
-                                </div> -->
-                            </td>
-                        </tr>
-                        <?php
-                            }
-                        ?>
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table id="tablaUsuarios" class="table table-striped table-bordered table-condensed" style="width:100%">  <!-- Tabla de usuarios falta el class -->
+                        <thead class="text-center">
+                            <tr>
+                                <th>Id</th>
+                                <th>Boleta</th>
+                                <th>Usuario</th>
+                                <th>email</th>
+                                <th>Rol</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <?php foreach ($usuarios as $usuario){ ?>
+                            <tr>
+                                <td><?= $usuario['id'] ?></td>
+                                <td><?= $usuario['boleta'] ?></td>
+                                <td><?= $usuario['usuario'] ?></td>
+                                <td><?= $usuario['email'] ?></td>
+                                <td><?= $usuario['es_admin'] ?></td>
+                                <td>
+                                    <!-- <div class="text-center">
+                                        <div class="btn-group">
+                                            <button class="btn btn-primary btnEditar">Editar</button>
+                                            <button class="btn btn-danger btnBorrar">Borrar</button>
+                                        </div>
+                                    </div> -->
+                                </td>
+                            </tr>
+                            <?php
+                                }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-    </main>
+    
 
     <!--Modal para CRUD-->
-<div class="modal fade" id="modalCRUD" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modalCRUD" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -142,7 +146,7 @@ $solicitudes = $recordsSolicitudes->fetchAll(PDO::FETCH_ASSOC);
 </div>  
       
     <!-- jQuery, Popper.js, Bootstrap JS -->
-    <script src="../jquery/jquery-3.3.1.min.js"></script>
+    <script src="../jquery/jquery-3.7.1.min.js"></script>
     <script src="../popper/popper.min.js"></script>
     <script src="../bootstrap/js/bootstrap.min.js"></script>
       
