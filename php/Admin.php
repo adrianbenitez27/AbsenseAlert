@@ -28,6 +28,7 @@ $solicitudes = $recordsSolicitudes->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="../css/styleIndex.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
     <title>Admin Panel</title>
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
     <style>
         table {
             margin: auto; /* Centra la tabla */
@@ -38,113 +39,117 @@ $solicitudes = $recordsSolicitudes->fetchAll(PDO::FETCH_ASSOC);
     </style>
 </head>
 <body>
-    <main class="main">
-        <section class="contenedor-1">
-            <header class="cabecera">
-                <div class="logo">
-                    <img src="../img/logoMusescom4.png" alt="logoMusescom">
-                </div>
-                <nav class="navegacion">
-                    <a href="index.php" class="link">Inicio</a>
 
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">AbsenseAlert</a>
+                <div class="navbar-nav">
+                    <a href="index.php" class="nav-link active">Inicio</a>
                     <?php if(!empty($_SESSION['usuario_id'])): ?>
-                        <a class="link"><?= $_SESSION['usuario'] ?></a>
-                        <a href="Cerrar_sesion.php" class="link">Cerrar sesión</a>
+                    <a class="nav-link"><?= $_SESSION['usuario'] ?></a>
+                    <a href="Cerrar_sesion.php" class="nav-link">Cerrar sesión</a>
                     <?php else: ?>    
-                        <a href="Inicio_de_sesion.php" class="link">Accede a tu cuenta</a>
-                        <a href="Registro_de_usuario.php" class="link">Crear una cuenta</a>
+                    <a href="Inicio_de_sesion.php" class="nav-link">Accede a tu cuenta</a>
+                    <a href="Registro_de_usuario.php" class="nav-link">Crear una cuenta</a>
                     <?php endif; ?>
-                </nav>
-            </header>
-            <div class="banner">
-                <div class="banner_textos">
-                    <button onclick="toggleSection('usuariosSection')">Mostrar Usuarios</button>
-                    <button onclick="toggleSection('solicitudesSection')">Mostrar Solicitudes</button>
-
-                    <div id="usuariosSection" class="hidden">
-                        <h2>Listado de Usuarios</h2>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Boleta</th>
-                                    <th>Usuario</th>
-                                    <th>Email</th>
-                                    <th>Es_Admin</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($usuarios as $usuario): ?>
-                                    <tr>
-                                        <td><?= $usuario['id'] ?></td>
-                                        <td><?= $usuario['boleta'] ?></td>
-                                        <td><?= $usuario['usuario'] ?></td>
-                                        <td><?= $usuario['email'] ?></td>
-                                        <td><?= $usuario['es_admin'] ?></td>
-                                        <td>
-                                            <button onclick="eliminarUsuario(<?= $usuario['id'] ?>)">Eliminar</button>
-                                            <button onclick="editarUsuario(<?= $usuario['id'] ?>)">Editar</button>
-                                        </td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <div id="solicitudesSection" class="hidden">
-                        <h2>Listado de Solicitudes</h2>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Boleta</th>
-                                    <th>Nombre</th>
-                                    <th>Apellido Paterno</th>
-                                    <th>Apellido Materno</th>
-                                    <th>Status</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($solicitudes as $solicitud): ?>
-                                    <tr>
-                                        <td><?= $solicitud['id'] ?></td>
-                                        <td><?= $solicitud['boleta'] ?></td>
-                                        <td><?= $solicitud['nombre'] ?></td>
-                                        <td><?= $solicitud['apellido_pat'] ?></td>
-                                        <td><?= $solicitud['apellido_mat'] ?></td>
-                                        <td><?= $solicitud['status'] ?></td>
-                                        <td>
-                                            <button onclick="verInfoSolicitud(<?= $solicitud['id'] ?>)">Ver Info</button>
-                                        </td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
-                    </div>
                 </div>
             </div>
-        </section>
-    </main>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container my-3">
+            <div class="row">
+                <div class="col-lg-12">            
+                <button id="btnNuevo" type="button" class="btn btn-success" data-toggle="modal">Nuevo</button>    
+            </div>    
+        </div>    
+    </div> 
     
-    <script>
-        function toggleSection(sectionId) {
-            var section = document.getElementById(sectionId);
-            section.style.display = section.style.display === 'none' ? 'block' : 'none';
-        }
+    <div class="container my-3">
+        <div class="row">
+            <div class="col-lg-12">
+                <table id="tablaUsuarios" class="table table-striped table-bordered table-condensed">  <!-- Tabla de usuarios falta el class -->
+                    <thead class="text-center">
+                        <tr>
+                            <th>Id</th>
+                            <th>Boleta</th>
+                            <th>Usuario</th>
+                            <th>email</th>
+                            <th>Rol</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach ($usuarios as $usuario){ ?>
+                        <tr>
+                            <td><?= $usuario['id'] ?></td>
+                            <td><?= $usuario['boleta'] ?></td>
+                            <td><?= $usuario['usuario'] ?></td>
+                            <td><?= $usuario['email'] ?></td>
+                            <td><?= $usuario['es_admin'] ?></td>
+                            <td>
+                                <!-- <div class="text-center">
+                                    <div class="btn-group">
+                                        <button class="btn btn-primary btnEditar">Editar</button>
+                                        <button class="btn btn-danger btnBorrar">Borrar</button>
+                                    </div>
+                                </div> -->
+                            </td>
+                        </tr>
+                        <?php
+                            }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    </main>
 
-        function verInfoSolicitud(solicitudId) {
-            window.location.href = 'VerInfo.php?id=' + solicitudId;
-        }
-        
-        function eliminarUsuario(userId) {
-            console.log('Eliminar usuario con ID: ' + userId);
-        }
-
-        function editarUsuario(userId) {
-            window.location.href = 'EditarUsuario.php?id=' + userId;
-        }
-    </script>
+    <!--Modal para CRUD-->
+<div class="modal fade" id="modalCRUD" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <form id="formPersonas">    
+            <div class="modal-body">
+                <div class="form-group">
+                <label for="nombre" class="col-form-label">Nombre:</label>
+                <input type="text" class="form-control" id="nombre">
+                </div>
+                <div class="form-group">
+                <label for="pais" class="col-form-label">País:</label>
+                <input type="text" class="form-control" id="pais">
+                </div>                
+                <div class="form-group">
+                <label for="edad" class="col-form-label">Edad:</label>
+                <input type="number" class="form-control" id="edad">
+                </div>            
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
+                <button type="submit" id="btnGuardar" class="btn btn-dark">Guardar</button>
+            </div>
+        </form>    
+        </div>
+    </div>
+</div>  
+      
+    <!-- jQuery, Popper.js, Bootstrap JS -->
+    <script src="../jquery/jquery-3.3.1.min.js"></script>
+    <script src="../popper/popper.min.js"></script>
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+      
+    <!-- datatables JS -->
+    <script type="text/javascript" src="../datatables/datatables.min.js"></script>    
+     
+    <script type="text/javascript" src="../main.js"></script> 
+   
 </body>
 </html>
