@@ -103,6 +103,7 @@ $solicitudes = $recordsSolicitudes->fetchAll(PDO::FETCH_ASSOC);
                                     <th>Apellido Paterno</th>
                                     <th>Apellido Materno</th>
                                     <th>Status</th>
+                                    <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -115,7 +116,7 @@ $solicitudes = $recordsSolicitudes->fetchAll(PDO::FETCH_ASSOC);
                                         <td><?= $solicitud['apellido_mat'] ?></td>
                                         <td><?= $solicitud['status'] ?></td>
                                         <td>
-                                            <button onclick="aprobarSolicitud(<?= $solicitud['id'] ?>)">Aprobar</button>
+                                            <button onclick="verInfoSolicitud(<?= $solicitud['id'] ?>)">Ver Info</button>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
@@ -132,14 +133,16 @@ $solicitudes = $recordsSolicitudes->fetchAll(PDO::FETCH_ASSOC);
             var section = document.getElementById(sectionId);
             section.style.display = section.style.display === 'none' ? 'block' : 'none';
         }
+
+        function verInfoSolicitud(solicitudId) {
+            window.location.href = 'VerInfo.php?id=' + solicitudId;
+        }
         
         function eliminarUsuario(userId) {
-            // Implementa la lógica para eliminar el usuario con el ID userId
             console.log('Eliminar usuario con ID: ' + userId);
         }
 
         function editarUsuario(userId) {
-            // Redirige a editar.php con el ID del usuario
             window.location.href = 'EditarUsuario.php?id=' + userId;
         }
     </script>
