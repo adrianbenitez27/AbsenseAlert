@@ -30,7 +30,7 @@ $("#btnNuevo").click(function(){
     $(".modal-header").css("color", "white");
     $(".modal-title").text("Nueva Persona");            
     $("#modalCRUD").modal("show");        
-    id=null;
+    // id=null;
     opcion = 1; //alta
 });    
     
@@ -40,13 +40,16 @@ var fila; //capturar la fila para editar o borrar el registro
 $(document).on("click", ".btnEditar", function(){
     fila = $(this).closest("tr");
     id = parseInt(fila.find('td:eq(0)').text());
-    nombre = fila.find('td:eq(1)').text();
-    pais = fila.find('td:eq(2)').text();
-    edad = parseInt(fila.find('td:eq(3)').text());
+    boleta = fila.find('td:eq(1)').text();
+    usuario = fila.find('td:eq(2)').text();
+    email = fila.find('td:eq(3)').text(); //revisar si jala el email
+    es_admin = parseInt(fila.find('td:eq(4)').text()); //revisar si es int o text
     
-    $("#nombre").val(nombre);
-    $("#pais").val(pais);
-    $("#edad").val(edad);
+    $("#id").val(id);
+    $("#boleta").val(boleta);
+    $("#usuario").val(usuario);
+    $("#email").val(email);
+    $("#es_admin").val(es_admin);
     opcion = 2; //editar
     
     $(".modal-header").css("background-color", "#007bff");
@@ -64,7 +67,7 @@ $(document).on("click", ".btnBorrar", function(){
     var respuesta = confirm("¿Está seguro de eliminar el registro: "+id+"?");
     if(respuesta){
         $.ajax({
-            url: "bd/crud.php",
+            url: "crud_Usuarios.php",
             type: "POST",
             dataType: "json",
             data: {opcion:opcion, id:id},
@@ -76,23 +79,28 @@ $(document).on("click", ".btnBorrar", function(){
 });
     
 $("#formPersonas").submit(function(e){
-    e.preventDefault();    
-    nombre = $.trim($("#nombre").val());
-    pais = $.trim($("#pais").val());
-    edad = $.trim($("#edad").val());    
+    e.preventDefault();  
+
+    id = $.trim($("#id").val());
+    boleta = $.trim($("#boleta").val());
+    usuario = $.trim($("#usuario").val());
+    email = $.trim($("#email").val());
+    es_admin = $.trim($("#es_admin").val());
+
     $.ajax({
-        url: "bd/crud.php",
+        url: "crud_Usuarios.php",
         type: "POST",
         dataType: "json",
-        data: {nombre:nombre, pais:pais, edad:edad, id:id, opcion:opcion},
+        data: {boleta:boleta, usuario:usuario, email:email, es_admin:es_admin, id:id, opcion:opcion},
         success: function(data){  
             console.log(data);
             id = data[0].id;            
-            nombre = data[0].nombre;
-            pais = data[0].pais;
-            edad = data[0].edad;
-            if(opcion == 1){tablaUsuarios.row.add([id,nombre,pais,edad]).draw();}
-            else{tablaUsuarios.row(fila).data([id,nombre,pais,edad]).draw();}            
+            boleta = data[0].boleta;
+            usuario = data[0].usuario;
+            email = data[0].email;
+            es_admin = data[0].es_admin;
+            if(opcion == 1){tablaUsuarios.row.add([id,boleta,usuario,email,es_admin]).draw();}
+            else{tablaUsuarios.row(fila).data([id,boleta,usuario,email,es_admin]).draw();}            
         }        
     });
     $("#modalCRUD").modal("hide");    

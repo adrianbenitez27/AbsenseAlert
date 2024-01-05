@@ -10,7 +10,8 @@ if (!isset($_SESSION['usuario_id']) || !isset($_SESSION['es_admin']) || $_SESSIO
 }
 
 // Obtener todos los usuarios
-$recordsUsuarios = $conn->prepare('SELECT id, boleta, usuario, email, es_admin FROM usuarios');
+$consulta = "SELECT id, boleta, usuario, email, es_admin FROM usuarios";
+$recordsUsuarios = $conn->prepare($consulta);
 $recordsUsuarios->execute();
 $usuarios = $recordsUsuarios->fetchAll(PDO::FETCH_ASSOC);
 
@@ -92,14 +93,7 @@ $solicitudes = $recordsSolicitudes->fetchAll(PDO::FETCH_ASSOC);
                                 <td><?= $usuario['usuario'] ?></td>
                                 <td><?= $usuario['email'] ?></td>
                                 <td><?= $usuario['es_admin'] ?></td>
-                                <td>
-                                    <!-- <div class="text-center">
-                                        <div class="btn-group">
-                                            <button class="btn btn-primary btnEditar">Editar</button>
-                                            <button class="btn btn-danger btnBorrar">Borrar</button>
-                                        </div>
-                                    </div> -->
-                                </td>
+                                <td></td>
                             </tr>
                             <?php
                                 }
@@ -124,17 +118,25 @@ $solicitudes = $recordsSolicitudes->fetchAll(PDO::FETCH_ASSOC);
         <form id="formPersonas">    
             <div class="modal-body">
                 <div class="form-group">
-                <label for="nombre" class="col-form-label">Nombre:</label>
-                <input type="text" class="form-control" id="nombre">
+                <label for="id" class="col-form-label">ID:</label>
+                <input type="number" class="form-control" id="id">
                 </div>
                 <div class="form-group">
-                <label for="pais" class="col-form-label">País:</label>
-                <input type="text" class="form-control" id="pais">
+                <label for="boleta" class="col-form-label">Boleta:</label>
+                <input type="text" class="form-control" id="boleta">
                 </div>                
                 <div class="form-group">
-                <label for="edad" class="col-form-label">Edad:</label>
-                <input type="number" class="form-control" id="edad">
-                </div>            
+                <label for="usuario" class="col-form-label">Usuario:</label>
+                <input type="text" class="form-control" id="usuario">
+                </div>     
+                <div class="form-group">
+                <label for="email" class="col-form-label">Correo:</label>
+                <input type="text" class="form-control" id="email">
+                </div>
+                <div class="form-group">
+                <label for="es_admin" class="col-form-label">Rol:</label>
+                <input type="text" class="form-control" id="es_admin">
+                </div>         
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
