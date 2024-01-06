@@ -1,3 +1,4 @@
+/* Reset y configuración global */
 * {
     margin: 0;
     padding: 0;
@@ -5,6 +6,7 @@
     font-family: 'Montserrat', sans-serif;
 }
 
+/* Estilos del cuerpo y diseño principal */
 body {
     background-color: #f8f8f8;
     color: #333;
@@ -14,6 +16,7 @@ body {
     width: 100%;
 }
 
+/* Estilos del encabezado */
 .cabecera {
     background: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -24,7 +27,8 @@ body {
 }
 
 .logo img {
-    width: 120px; /* Ajusta el tamaño según tu necesidad */
+    width: 520px;
+    height: 50vh;
     height: auto;
 }
 
@@ -47,6 +51,7 @@ body {
     color: #fff;
 }
 
+/* Estilos del banner */
 .banner {
     background-image: url(../img/fondo1.jpg);
     background-size: cover;
@@ -63,18 +68,19 @@ body {
 }
 
 .banner_textos h1 {
-    font-size: 3em;
-    margin-bottom: 40px;
-}
-
-.banner_textos p {
-    font-size: 1.2em;
+    font-size: 5em;
+    text-align: center;
     margin-bottom: 50px;
 }
 
+.banner_textos p {
+    font-size: 2em;
+    margin-bottom: 60px;
+}
+
 .banner_textos a {
+    /* Consolidación de propiedades */
     display: inline-block;
-    background-color: #a8103dc5;
     padding: 5px 60px;
     text-align: center;
     text-decoration: none;
@@ -89,7 +95,8 @@ body {
     color: #56b4d3;
 }
 
-.contenedor-2{
+/* Estilos del contenedor-2 */
+.contenedor-2 {
     width: 100%;
     height: 100vh;
     background-color: #ffffff;
@@ -100,20 +107,23 @@ body {
     color: rgb(131, 15, 34);
 }
 
-.text{
+.text {
     width: 70%;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-.text h2{
+
+.text h2 {
     font-size: 40px;
 }
 
-.text p{
+.text p {
     margin: 26px;
     font-size: 28px;
 }
+
+/* Resto del código... */
 
 .fotos{
     width: 70%;
