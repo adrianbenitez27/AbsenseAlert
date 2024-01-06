@@ -47,7 +47,7 @@ $solicitudes = $recordsSolicitudes->fetchAll(PDO::FETCH_ASSOC);
     <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-3">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">AbsenseAlert</a>
+                <a class="navbar-brand" href="#">Administrador</a>
                 <div class="navbar-nav">
                     <a href="index.php" class="nav-link active">Inicio</a>
                     <?php if(!empty($_SESSION['usuario'])): ?>
