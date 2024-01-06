@@ -12,7 +12,7 @@ if (!isset($_SESSION['usuario']) || !isset($_SESSION['es_admin']) || $_SESSION['
 // Obtener todos los usuarios
 
 // Obtener todas las solicitudes
-$recordsSolicitudes = $conn->prepare('SELECT id, boleta, nombre, apellido_pat, apellido_mat, status FROM datos_justificante');
+$recordsSolicitudes = $conn->prepare('SELECT id, boleta, nombre, apellido_pat, apellido_mat,fecha_ini,fecha_fin,fecha_jus,razon_ausen,status FROM datos_justificante');
 $recordsSolicitudes->execute();
 $solicitudes = $recordsSolicitudes->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -72,7 +72,6 @@ $solicitudes = $recordsSolicitudes->fetchAll(PDO::FETCH_ASSOC);
         <div class="row">
             <div class="col-lg-12">            
                 <button id="btnNuevo" type="button" class="btn btn-success" data-toggle="modal">Nuevo</button>
-                <button id="btnNuevo" type="button" class="btn btn-success" data-toggle="modal">Verificar</button>    
             </div>
                 
         </div>    
@@ -82,7 +81,7 @@ $solicitudes = $recordsSolicitudes->fetchAll(PDO::FETCH_ASSOC);
         <div class="row">
             <div class="col-lg-12">
                 <div class="table-responsive">
-                    <table id="tablaUsuarios" class="table table-striped table-bordered table-condensed" style="width:100%">  <!-- Tabla de usuarios falta el class -->
+                    <table id="tablaJustificantes" class="table table-striped table-bordered table-condensed" style="width:100%">  <!-- Tabla de usuarios falta el class -->
                         <thead class="text-center">
                             <tr>
                                 <th>Id</th>
@@ -90,6 +89,10 @@ $solicitudes = $recordsSolicitudes->fetchAll(PDO::FETCH_ASSOC);
                                 <th>Nombre</th>
                                 <th>Apellido Paterno</th>
                                 <th>Apellido Materno</th>
+                                <th>Fecha Inicio</th>
+                                <th>Fecha Termino</th>
+                                <th>Fecha Solucitud</th>
+                                <th>Motivo</th>
                                 <th>Status</th>
                                 <th>Acciones</th>
                             </tr>
@@ -102,6 +105,10 @@ $solicitudes = $recordsSolicitudes->fetchAll(PDO::FETCH_ASSOC);
                                 <td><?= $solicitud['nombre'] ?></td>
                                 <td><?= $solicitud['apellido_pat'] ?></td>
                                 <td><?= $solicitud['apellido_mat'] ?></td>
+                                <td><?= $solicitud['fecha_ini'] ?></td>
+                                <td><?= $solicitud['fecha_fin'] ?></td>
+                                <td><?= $solicitud['fecha_jus'] ?></td>
+                                <td><?= $solicitud['razon_ausen'] ?></td>
                                 <td><?= $solicitud['status'] ?></td>
                                 <td></td>
                             </tr>
@@ -165,7 +172,7 @@ $solicitudes = $recordsSolicitudes->fetchAll(PDO::FETCH_ASSOC);
     <!-- datatables JS -->
     <script type="text/javascript" src="../datatables/datatables.min.js"></script>    
      
-    <script type="text/javascript" src="../main.js"></script> 
+    <script type="text/javascript" src="../verificacion.js"></script> 
    
 </body>
 </html>
