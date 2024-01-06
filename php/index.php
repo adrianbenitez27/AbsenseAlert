@@ -45,7 +45,7 @@
             <section class="contenedor-1">
                 <header class="cabecera">
                     <div class="logo">
-                        <img src="../img/logoMusescom4.png" alt="logoMusescom">
+                        <img src="../img/encabezado.png" alt="logoMusescom">
                     </div>
                     <nav class="navegacion">
                         <a href="index.php" class="link">Inicio</a>
