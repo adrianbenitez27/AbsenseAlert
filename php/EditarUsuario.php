@@ -3,7 +3,7 @@ require 'Conexion_base_de_datos.php';
 session_start();
 
 // Verificar si el usuario tiene permisos de administrador
-if (!isset($_SESSION['usuario_id']) || !isset($_SESSION['es_admin']) || $_SESSION['es_admin'] != 1) {
+if (!isset($_SESSION['usuario']) || !isset($_SESSION['es_admin']) || $_SESSION['es_admin'] != 1) {
     // Si no es administrador, redirige a la página principal o muestra un mensaje de error
     header('Location: ../index.html');
     exit;

@@ -2,7 +2,7 @@
 require 'Conexion_base_de_datos.php';
 session_start();
 
-$id= (isset($_POST['id'])) ? $_POST['id'] : '';
+// $id= (isset($_POST['id'])) ? $_POST['id'] : '';
 $boleta = (isset($_POST['boleta'])) ? $_POST['boleta'] : '';
 $usuario = (isset($_POST['usuario'])) ? $_POST['usuario'] : '';
 $email = (isset($_POST['email'])) ? $_POST['email'] : '';
@@ -16,7 +16,7 @@ switch($opcion){
         $recordsUsuarios = $conn->prepare($consulta);
         $recordsUsuarios->execute(); 
 
-        $consulta = "SELECT id, boleta, usuario, correo, rol FROM usuarios ORDER BY id DESC LIMIT 1";
+        $consulta = "SELECT id, boleta, usuario, email, es_admin FROM usuarios ORDER BY id DESC LIMIT 1";
         $recordsUsuarios = $conn->prepare($consulta);
         $recordsUsuarios->execute();
         $usuarios=$recordsUsuarios->fetchAll(PDO::FETCH_ASSOC);
