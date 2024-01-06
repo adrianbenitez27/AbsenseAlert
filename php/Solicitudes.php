@@ -10,10 +10,6 @@ if (!isset($_SESSION['usuario']) || !isset($_SESSION['es_admin']) || $_SESSION['
 }
 
 // Obtener todos los usuarios
-$consulta = "SELECT id, boleta, usuario, email, es_admin FROM usuarios";
-$recordsUsuarios = $conn->prepare($consulta);
-$recordsUsuarios->execute();
-$usuarios = $recordsUsuarios->fetchAll(PDO::FETCH_ASSOC);
 
 // Obtener todas las solicitudes
 $recordsSolicitudes = $conn->prepare('SELECT id, boleta, nombre, apellido_pat, apellido_mat, status FROM datos_justificante');
@@ -64,9 +60,17 @@ $solicitudes = $recordsSolicitudes->fetchAll(PDO::FETCH_ASSOC);
         </nav>
     </header>
 
-        <div class="container my-3">
-            <div class="row">
-                <div class="col-lg-12">            
+    <div class="container my-3">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="text-center">Listado de Solicitudes</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="container my-3">
+        <div class="row">
+            <div class="col-lg-12">            
                 <button id="btnNuevo" type="button" class="btn btn-success" data-toggle="modal">Nuevo</button>    
             </div>    
         </div>    
@@ -81,20 +85,22 @@ $solicitudes = $recordsSolicitudes->fetchAll(PDO::FETCH_ASSOC);
                             <tr>
                                 <th>Id</th>
                                 <th>Boleta</th>
-                                <th>Usuario</th>
-                                <th>email</th>
-                                <th>Rol</th>
+                                <th>Nombre</th>
+                                <th>Apellido Paterno</th>
+                                <th>Apellido Materno</th>
+                                <th>Status</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <?php foreach ($usuarios as $usuario){ ?>
+                        <?php foreach ($solicitudes as $solicitud){ ?>
                             <tr>
-                                <td><?= $usuario['id'] ?></td>
-                                <td><?= $usuario['boleta'] ?></td>
-                                <td><?= $usuario['usuario'] ?></td>
-                                <td><?= $usuario['email'] ?></td>
-                                <td><?= $usuario['es_admin'] ?></td>
+                                <td><?= $solicitud['id'] ?></td>
+                                <td><?= $solicitud['boleta'] ?></td>
+                                <td><?= $solicitud['nombre'] ?></td>
+                                <td><?= $solicitud['apellido_pat'] ?></td>
+                                <td><?= $solicitud['apellido_mat'] ?></td>
+                                <td><?= $solicitud['status'] ?></td>
                                 <td></td>
                             </tr>
                             <?php
@@ -109,7 +115,7 @@ $solicitudes = $recordsSolicitudes->fetchAll(PDO::FETCH_ASSOC);
     
 
     <!--Modal para CRUD-->
-    <div class="modal fade" id="modalCRUD" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- <div class="modal fade" id="modalCRUD" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -147,7 +153,7 @@ $solicitudes = $recordsSolicitudes->fetchAll(PDO::FETCH_ASSOC);
         </form>    
         </div>
     </div>
-</div>  
+</div>   -->
       
     <!-- jQuery, Popper.js, Bootstrap JS -->
     <script src="../jquery/jquery-3.7.1.min.js"></script>
