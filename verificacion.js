@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    tablaUsuarios = $("#tablaJustificantes").DataTable({
+    tablaJustificantes = $("#tablaJustificantes").DataTable({
         "columnDefs": [{
             "targets": -1,
             "data": null,
@@ -29,54 +29,71 @@ $(document).ready(function () {
 
     //botón VERIFICAR   
     $(document).on("click", ".btnVerificar", function () {
+        opcion = 1; //editar
         fila = $(this).closest("tr");
         id = parseInt(fila.find('td:eq(0)').text());
         boleta = fila.find('td:eq(1)').text();
-        usuario = fila.find('td:eq(2)').text();
-        email = fila.find('td:eq(3)').text(); //revisar si jala el email
-        statuss = fila.find('td:eq(2)').text();
-        es_admin = parseInt(fila.find('td:eq(4)').text()); //revisar si es int o text
+        nombre = fila.find('td:eq(2)').text();
+        apellidoPat = fila.find('td:eq(3)').text(); //revisar si jala el email
+        apellidoMat = fila.find('td:eq(4)').text(); //revisar si jala el email
+        fechaIn = parseInt(fila.find('td:eq(5)').text()); //revisar si es int o text
+        fechaTerm = fila.find('td:eq(6)').text();
+        fechaSolic = fila.find('td:eq(7)').text();
+        razon_ausen = fila.find('td:eq(8)').text();
+        statuss = fila.find('td:eq(9)').text();
 
         $("#id").val(id);
         $("#boleta").val(boleta);
-        $("#usuario").val(usuario);
-        $("#email").val(email);
-        $("#es_admin").val(es_admin);
+        $("#nombre").val(nombre);
+        $("#apellido_pat").val(apellidoPat);
+        $("#apellido_mat").val(apellidoMat);
+        $("#fecha_ini").val(fechaIn);
+        $("#fecha_fin").val(fechaTerm);
+        $("#fecha_jus").val(fechaSolic);
+        $("#razon_ausen").val(razon_ausen);
         $("#statuss").val(statuss);
-        opcion = 2; //editar
+
 
         $(".modal-header").css("background-color", "#007bff");
         $(".modal-header").css("color", "white");
-        $(".modal-title").text("Editar Persona");
+        $(".modal-title").text("Editar status");
         $("#modalCRUD").modal("show");
 
     });
 
     $("#formSolicitudes").submit(function (e) {
         e.preventDefault();
-
         id = $.trim($("#id").val());
         boleta = $.trim($("#boleta").val());
-        usuario = $.trim($("#usuario").val());
-        email = $.trim($("#email").val());
-        es_admin = $.trim($("#es_admin").val());
+        nombre = $.trim($("#nombre").val());
+        apellidoPat = $.trim($("#apellido_pat").val());
+        apellidoMat = $.trim($("#apellido_mat").val());
+        fechaIn = $.trim($("#fecha_ini").val());
+        fechaTerm = $.trim($("#fecha_fin").val());
+        fechaSolic = $.trim($("#fecha_jus").val());
+        razon_ausen = $.trim($("#razon_ausen").val());
         statuss = $.trim($("#statuss").val());
 
         $.ajax({
             url: "crud_justificantes.php",
             type: "POST",
             dataType: "json",
-            data: { boleta: boleta, usuario: usuario, email: email, es_admin: es_admin, statuss:statuss, id: id, opcion: opcion },
+            data: {id:id, boleta:boleta, nombre:nombre, apellidoPat:apellidoPat, apellidoMat:apellidoMat, fechaIn:fechaIn, fechaTerm:fechaTerm, fechaSolic:fechaSolic, razon_ausen:razon_ausen , statuss:statuss, opcion:opcion},
             success: function (data) {
                 console.log(data);
+                console.log(id);
                 id = data[0].id;
                 boleta = data[0].boleta;
-                usuario = data[0].usuario;
-                email = data[0].email;
-                es_admin = data[0].es_admin;
-                statuss = data[0].es_admin;
-                if (opcion == 1) { tablaUsuarios.row.add([id, boleta, usuario, email, es_admin,statuss]).draw(); }
-                else { tablaUsuarios.row(fila).data([id, boleta, usuario, email, es_admin,statuss]).draw(); }
+                nombre = data[0].nombre;
+                apellidoPat = data[0].apellidoPat;
+                apellidoMat = data[0].apellidoMat;
+                fechaIn = data[0].fechaIn;
+                fechaTerm = data[0].fechaTerm;
+                fechaSolic = data[0].fechaSolic;
+                razon_ausen = data[0].razon_ausen;
+                statuss = data[0].statuss;
+                if (opcion == 1) { tablaJustificantes.row(fila).data([id, boleta, usuario, nombre, apellidoPat,apellidoMat,fechaIn,fechaTerm,fechaSolic,razon_ausen,statuss]).draw(); }
+                else { tablaJustificantes.row.add([id, boleta, usuario, nombre, apellidoPat,apellidoMat,fechaIn,fechaTerm,fechaSolic,razon_ausen,statuss]).draw(); }
             }
         });
         $("#modalCRUD").modal("hide");

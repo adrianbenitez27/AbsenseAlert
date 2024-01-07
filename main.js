@@ -93,7 +93,7 @@ $("#formPersonas").submit(function(e){
         dataType: "json",
         data: {boleta:boleta, usuario:usuario, email:email, es_admin:es_admin, id:id, opcion:opcion},
         success: function(data){  
-            console.log(data);
+            console.log(id);
             id = data[0].id;            
             boleta = data[0].boleta;
             usuario = data[0].usuario;

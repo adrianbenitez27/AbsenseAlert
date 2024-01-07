@@ -156,7 +156,7 @@ $solicitudes = $recordsSolicitudes->fetchAll(PDO::FETCH_ASSOC);
       
     <!-- datatables JS -->
     <script type="text/javascript" src="../datatables/datatables.min.js"></script>    
-     
+
     <script type="text/javascript" src="../main.js"></script> 
    
 </body>

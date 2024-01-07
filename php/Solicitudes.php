@@ -9,9 +9,8 @@ if (!isset($_SESSION['usuario']) || !isset($_SESSION['es_admin']) || $_SESSION['
     exit;
 }
 
-// Obtener todos los usuarios
-
 // Obtener todas las solicitudes
+
 $recordsSolicitudes = $conn->prepare('SELECT id, boleta, nombre, apellido_pat, apellido_mat,fecha_ini,fecha_fin,fecha_jus,razon_ausen,statuss FROM datos_justificante');
 $recordsSolicitudes->execute();
 $solicitudes = $recordsSolicitudes->fetchAll(PDO::FETCH_ASSOC);
@@ -128,13 +127,17 @@ $solicitudes = $recordsSolicitudes->fetchAll(PDO::FETCH_ASSOC);
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="id" class="col-form-label">Status:</label>
-                            <select name="status" required>
+                            <select id="statuss" name="statuss" required>
                                 <option selected disabled="">Selecciona una opcion</option>
                                 <option value="Rechazado">Rechazado</option>
                                 <option value="Aceptado">Aceptado</option>
                                 <option value="Pendiente">Pendiente</option>
                             </select>
                         </div>
+                        <div class="form-group">
+                            <label for="es_admin" class="col-form-label">Motivo:</label>
+                            <input type="text" class="form-control" id="razon_ausen">
+                        </div>           
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
@@ -152,7 +155,6 @@ $solicitudes = $recordsSolicitudes->fetchAll(PDO::FETCH_ASSOC);
 
     <!-- datatables JS -->
     <script type="text/javascript" src="../datatables/datatables.min.js"></script>
-
     <script type="text/javascript" src="../verificacion.js"></script>
 
 </body>
