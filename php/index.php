@@ -53,11 +53,13 @@
                         <?php if(!empty($user)): ?>
                             <a class="link"><?= $user['usuario'] ?></a>
                             <a href="Cerrar_sesion.php" class="link">Cerrar sesion</a>
+                            <a href="Formulario.php" class="link">Solicitar justificante</a> 
                             <a href="Status_justificantes.php" class="link">Revisar status de justificantes</a>
                             <?php if ($_SESSION['es_admin'] == 1): ?>
-                                <a href="Admin.php" class="link">Administrador</a>
+                                <a href="Admin.php" class="link">Control administrador</a>
                             <?php endif; ?>
-                        <?php else: ?>    
+                        <?php else: ?>
+                               
                             <a href="Inicio_de_sesion.php" class="link">Accede a tu cuenta</a>
                             <a href="Registro_de_usuario.php" class="link">Crear una cuenta</a>
                         <?php endif;?>

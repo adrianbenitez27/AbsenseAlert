@@ -4,7 +4,7 @@
 
 body{
     font-family: 'Roboto', sans-serif;
-    background: #6b0303;
+    background: #e98888;
 }
 
 main{
@@ -16,12 +16,12 @@ main{
 
 main fieldset legend{
     color: white;
-    background: #223651;
+    background: #a80000;
     padding: 5px;
     border-radius: 15px;
     font-size: 15px;
     font-weight: bold;
-    box-shadow: 1px 1px 1px 1px #800000;
+    box-shadow: 1px 1px 1px 1px #e9a8a8;
     height: 60px;
     width: 300px;
     text-align: center;
@@ -61,7 +61,7 @@ fieldset{
 
 .formulario_input{
     width: 100%;
-    background: #800000;
+    background: #eba1a1;
     border: 3px solid transparent;
     border-radius: 3px;
     height: 45px;
@@ -136,7 +136,7 @@ select{
     height: 45px;
 	line-height: 45px;
 	width: 30%;
-	background: #790720;
+	background: #d30935;
 	color: white;
 	font-weight: bold;
 	border: none;
