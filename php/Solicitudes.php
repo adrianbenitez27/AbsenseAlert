@@ -19,10 +19,11 @@ $solicitudes = $recordsSolicitudes->fetchAll(PDO::FETCH_ASSOC);
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="#" /> 
+    <link rel="shortcut icon" href="#" />
     <!-- <link rel="stylesheet" href="../css/styleIndex.css"> -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
     <title>Admin Panel</title>
@@ -39,21 +40,22 @@ $solicitudes = $recordsSolicitudes->fetchAll(PDO::FETCH_ASSOC);
         }
     </style> -->
 </head>
+
 <body>
     <header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-3">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-3">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">AbsenseAlert</a>
+                <a class="navbar-brand" href="#">SusanoBurrito</a>
                 <div class="navbar-nav">
                     <a href="index.php" class="nav-link active">Inicio</a>
-                    <?php if(!empty($_SESSION['usuario'])): ?>
-                    <a class="nav-link"><?= $_SESSION['usuario'] ?></a>
-                    <a href="Admin.php" class="nav-link">Usuarios</a>
-                    <a href="Solicitudes.php" class="nav-link">Solicitudes</a>
-                    <a href="Cerrar_sesion.php" class="nav-link">Cerrar sesión</a>
-                    <?php else: ?>    
-                    <a href="Inicio_de_sesion.php" class="nav-link">Accede a tu cuenta</a>
-                    <a href="Registro_de_usuario.php" class="nav-link">Crear una cuenta</a>
+                    <?php if (!empty($_SESSION['usuario'])) : ?>
+                        <a class="nav-link"><?= $_SESSION['usuario'] ?></a>
+                        <a href="Admin.php" class="nav-link">Usuarios</a>
+                        <a href="Solicitudes.php" class="nav-link">Solicitudes</a>
+                        <a href="Cerrar_sesion.php" class="nav-link">Cerrar sesión</a>
+                    <?php else : ?>
+                        <a href="Inicio_de_sesion.php" class="nav-link">Accede a tu cuenta</a>
+                        <a href="Registro_de_usuario.php" class="nav-link">Crear una cuenta</a>
                     <?php endif; ?>
                 </div>
             </div>
@@ -70,18 +72,18 @@ $solicitudes = $recordsSolicitudes->fetchAll(PDO::FETCH_ASSOC);
 
     <div class="container my-3">
         <div class="row">
-            <div class="col-lg-12">            
+            <div class="col-lg-12">
                 <button id="btnNuevo" type="button" class="btn btn-success" data-toggle="modal">Nuevo</button>
             </div>
-                
-        </div>    
-    </div> 
-    
+
+        </div>
+    </div>
+
     <div class="container my-3">
         <div class="row">
             <div class="col-lg-12">
                 <div class="table-responsive">
-                    <table id="tablaJustificantes" class="table table-striped table-bordered table-condensed" style="width:100%">  <!-- Tabla de usuarios falta el class -->
+                    <table id="tablaJustificantes" class="table table-striped table-bordered table-condensed" style="width:100%"> <!-- Tabla de usuarios falta el class -->
                         <thead class="text-center">
                             <tr>
                                 <th>Id</th>
@@ -98,22 +100,22 @@ $solicitudes = $recordsSolicitudes->fetchAll(PDO::FETCH_ASSOC);
                             </tr>
                         </thead>
                         <tbody>
-                        <?php foreach ($solicitudes as $solicitud){ ?>
-                            <tr>
-                                <td><?= $solicitud['id'] ?></td>
-                                <td><?= $solicitud['boleta'] ?></td>
-                                <td><?= $solicitud['nombre'] ?></td>
-                                <td><?= $solicitud['apellido_pat'] ?></td>
-                                <td><?= $solicitud['apellido_mat'] ?></td>
-                                <td><?= $solicitud['fecha_ini'] ?></td>
-                                <td><?= $solicitud['fecha_fin'] ?></td>
-                                <td><?= $solicitud['fecha_jus'] ?></td>
-                                <td><?= $solicitud['razon_ausen'] ?></td>
-                                <td><?= $solicitud['status'] ?></td>
-                                <td></td>
-                            </tr>
+                            <?php foreach ($solicitudes as $solicitud) { ?>
+                                <tr>
+                                    <td><?= $solicitud['id'] ?></td>
+                                    <td><?= $solicitud['boleta'] ?></td>
+                                    <td><?= $solicitud['nombre'] ?></td>
+                                    <td><?= $solicitud['apellido_pat'] ?></td>
+                                    <td><?= $solicitud['apellido_mat'] ?></td>
+                                    <td><?= $solicitud['fecha_ini'] ?></td>
+                                    <td><?= $solicitud['fecha_fin'] ?></td>
+                                    <td><?= $solicitud['fecha_jus'] ?></td>
+                                    <td><?= $solicitud['razon_ausen'] ?></td>
+                                    <td><?= $solicitud['status'] ?></td>
+                                    <td></td>
+                                </tr>
                             <?php
-                                }
+                            }
                             ?>
                         </tbody>
                     </table>
@@ -121,7 +123,7 @@ $solicitudes = $recordsSolicitudes->fetchAll(PDO::FETCH_ASSOC);
             </div>
         </div>
     </div>
-    
+
 
     <!--Modal para CRUD-->
     <!-- <div class="modal fade" id="modalCRUD" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -163,16 +165,17 @@ $solicitudes = $recordsSolicitudes->fetchAll(PDO::FETCH_ASSOC);
         </div>
     </div>
 </div>   -->
-      
+
     <!-- jQuery, Popper.js, Bootstrap JS -->
     <script src="../jquery/jquery-3.7.1.min.js"></script>
     <script src="../popper/popper.min.js"></script>
     <script src="../bootstrap/js/bootstrap.min.js"></script>
-      
+
     <!-- datatables JS -->
-    <script type="text/javascript" src="../datatables/datatables.min.js"></script>    
-     
-    <script type="text/javascript" src="../verificacion.js"></script> 
-   
+    <script type="text/javascript" src="../datatables/datatables.min.js"></script>
+
+    <script type="text/javascript" src="../verificacion.js"></script>
+
 </body>
+
 </html>
