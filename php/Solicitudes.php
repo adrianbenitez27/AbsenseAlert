@@ -12,7 +12,7 @@ if (!isset($_SESSION['usuario']) || !isset($_SESSION['es_admin']) || $_SESSION['
 // Obtener todos los usuarios
 
 // Obtener todas las solicitudes
-$recordsSolicitudes = $conn->prepare('SELECT id, boleta, nombre, apellido_pat, apellido_mat,fecha_ini,fecha_fin,fecha_jus,razon_ausen,status FROM datos_justificante');
+$recordsSolicitudes = $conn->prepare('SELECT id, boleta, nombre, apellido_pat, apellido_mat,fecha_ini,fecha_fin,fecha_jus,razon_ausen,statuss FROM datos_justificante');
 $recordsSolicitudes->execute();
 $solicitudes = $recordsSolicitudes->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -73,15 +73,6 @@ $solicitudes = $recordsSolicitudes->fetchAll(PDO::FETCH_ASSOC);
     <div class="container my-3">
         <div class="row">
             <div class="col-lg-12">
-                <button id="btnNuevo" type="button" class="btn btn-success" data-toggle="modal">Nuevo</button>
-            </div>
-
-        </div>
-    </div>
-
-    <div class="container my-3">
-        <div class="row">
-            <div class="col-lg-12">
                 <div class="table-responsive">
                     <table id="tablaJustificantes" class="table table-striped table-bordered table-condensed" style="width:100%"> <!-- Tabla de usuarios falta el class -->
                         <thead class="text-center">
@@ -111,7 +102,7 @@ $solicitudes = $recordsSolicitudes->fetchAll(PDO::FETCH_ASSOC);
                                     <td><?= $solicitud['fecha_fin'] ?></td>
                                     <td><?= $solicitud['fecha_jus'] ?></td>
                                     <td><?= $solicitud['razon_ausen'] ?></td>
-                                    <td><?= $solicitud['status'] ?></td>
+                                    <td><?= $solicitud['statuss'] ?></td>
                                     <td></td>
                                 </tr>
                             <?php
@@ -125,46 +116,34 @@ $solicitudes = $recordsSolicitudes->fetchAll(PDO::FETCH_ASSOC);
     </div>
 
 
-    <!--Modal para CRUD-->
-    <!-- <div class="modal fade" id="modalCRUD" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel"></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        <form id="formPersonas">    
-            <div class="modal-body">
-                <div class="form-group">
-                <label for="id" class="col-form-label">ID:</label>
-                <input type="number" class="form-control" id="id">
+    <div class="modal fade" id="modalCRUD" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-                <div class="form-group">
-                <label for="boleta" class="col-form-label">Boleta:</label>
-                <input type="text" class="form-control" id="boleta">
-                </div>                
-                <div class="form-group">
-                <label for="usuario" class="col-form-label">Usuario:</label>
-                <input type="text" class="form-control" id="usuario">
-                </div>     
-                <div class="form-group">
-                <label for="email" class="col-form-label">Correo:</label>
-                <input type="text" class="form-control" id="email">
-                </div>
-                <div class="form-group">
-                <label for="es_admin" class="col-form-label">Rol:</label>
-                <input type="text" class="form-control" id="es_admin">
-                </div>         
+                <form id="formSolicitudes">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="id" class="col-form-label">Status:</label>
+                            <select name="status" required>
+                                <option selected disabled="">Selecciona una opcion</option>
+                                <option value="Rechazado">Rechazado</option>
+                                <option value="Aceptado">Aceptado</option>
+                                <option value="Pendiente">Pendiente</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" id="btnGuardar" class="btn btn-dark">Guardar</button>
+                    </div>
+                </form>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
-                <button type="submit" id="btnGuardar" class="btn btn-dark">Guardar</button>
-            </div>
-        </form>    
         </div>
     </div>
-</div>   -->
 
     <!-- jQuery, Popper.js, Bootstrap JS -->
     <script src="../jquery/jquery-3.7.1.min.js"></script>

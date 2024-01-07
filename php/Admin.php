@@ -16,7 +16,7 @@ $recordsUsuarios->execute();
 $usuarios = $recordsUsuarios->fetchAll(PDO::FETCH_ASSOC);
 
 // Obtener todas las solicitudes
-$recordsSolicitudes = $conn->prepare('SELECT id, boleta, nombre, apellido_pat, apellido_mat, status FROM datos_justificante');
+$recordsSolicitudes = $conn->prepare('SELECT id, boleta, nombre, apellido_pat, apellido_mat, statuss FROM datos_justificante');
 $recordsSolicitudes->execute();
 $solicitudes = $recordsSolicitudes->fetchAll(PDO::FETCH_ASSOC);
 ?>
