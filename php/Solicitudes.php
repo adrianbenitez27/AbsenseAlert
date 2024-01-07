@@ -10,8 +10,8 @@ if (!isset($_SESSION['usuario']) || !isset($_SESSION['es_admin']) || $_SESSION['
 }
 
 // Obtener todas las solicitudes
-
-$recordsSolicitudes = $conn->prepare('SELECT id, boleta, nombre, apellido_pat, apellido_mat,fecha_ini,fecha_fin,fecha_jus,razon_ausen,statuss FROM datos_justificante');
+$consulta = 'SELECT id, boleta, nombre, apellido_pat, apellido_mat,fecha_ini,fecha_fin,fecha_jus,razon_ausen,statuss FROM datos_justificante';
+$recordsSolicitudes = $conn->prepare($consulta);
 $recordsSolicitudes->execute();
 $solicitudes = $recordsSolicitudes->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -126,18 +126,9 @@ $solicitudes = $recordsSolicitudes->fetchAll(PDO::FETCH_ASSOC);
                 <form id="formSolicitudes">
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="id" class="col-form-label">Status:</label>
-                            <select id="statuss" name="statuss" required>
-                                <option selected disabled="">Selecciona una opcion</option>
-                                <option value="Rechazado">Rechazado</option>
-                                <option value="Aceptado">Aceptado</option>
-                                <option value="Pendiente">Pendiente</option>
-                            </select>
+                            <label for="statuss" class="col-form-label">Status:</label>
+                            <input type="text" class="form-control" id="statuss">
                         </div>
-                        <div class="form-group">
-                            <label for="es_admin" class="col-form-label">Motivo:</label>
-                            <input type="text" class="form-control" id="razon_ausen">
-                        </div>           
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
