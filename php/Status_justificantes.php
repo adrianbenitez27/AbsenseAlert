@@ -6,7 +6,7 @@
         //$records=$conn->prepare('SELECT id,boleta,usuario,email,contrasena FROM usuarios WHERE id=:id');
         $records=$conn->prepare('SELECT id,boleta,nombre,apellido_pat,apellido_mat,fecha_nac,genero,curp,
         direccion,colonia,estado_proce,codigo_postal,telefono,email,escuela_proce,fecha_ini,fecha_fin,razon_ausen,
-        archivo_com_med,status,fecha_jus FROM datos_justificante WHERE id=:id');
+        archivo_com_med,statuss,fecha_jus FROM datos_justificante WHERE id=:id');
         $records->bindParam(':id', $_SESSION['usuario_id']);
         $records->execute();
         //$resultado = $records->fetch(PDO::FETCH_ASSOC);
@@ -73,11 +73,11 @@
                                 echo '<tr>';
                                     echo '<td>' . $cont . '</td>';
                                     echo '<td>' . $row['fecha_jus'] . '</td>';
-                                    echo '<td>' . $row['status'] . '</td>';
-                                    if($row['status'] == "Pendiente"){
+                                    echo '<td>' . $row['statuss'] . '</td>';
+                                    if($row['statuss'] == "Pendiente"){
                                         echo '<td>' . 'Aún no se ha revisado tu información' . '</td>';
                                     }
-                                    else if($row['status'] == "Rechazado"){
+                                    else if($row['statuss'] == "Rechazado"){
                                         echo '<td>' . 'Tu información no cumplió las especificaciones' . '</td>';
                                     }
                                 echo '</tr>';
