@@ -66,34 +66,32 @@
                 </header>
                 <div class="banner">
                     <div class="banner_textos">
-                        <h1>El precio es música para sus oídos</h1>
-                        <p>Musescom es una plataforma para crear creadores de musica y 
-                            para aquellos que quieren comenzar.</p>
-                            <a href="Cursos.html">Ver los cursos</a>
+                    <h1>SUSANO BURRITO</h1>
+                    <p>Este proyecto educativo tiene como finalidad optimizar la gestión de justificantes por enfermedad y fortalecer las medidas preventivas durante el actual ciclo escolar. Se empleará una metodología de cascada que se alinea con las fases de análisis, diseño, programación, pruebas y mantenimiento.</p>
+
+                    <a href="php/Inicio_de_sesion.php">Iniciar tramite</a>
                     </div>
                 </div>
             </section>
             <section class="contenedor-2">
                 <div class="text">
-                    <h2>Nuestro proposito</h2>
-                    <p>En Musescom podras interactuar con usuarios para compartir 
-                        tus creaciones y aprendizaje de los cursos que impartimos.</p>
+                <h2>Nuestro proposito</h2>
+                    <p>Bienvenido a Susano Burrito, la innovadora aplicación que simplifica y agiliza la creación de justificantes por enfermedad. Nos dedicamos a proporcionar una herramienta fácil de usar que facilita la generación de documentos necesarios para ausencias escolares.</p>
+                    
                 </div>
                 <div class="fotos">
                     <div class="fotos_img">
                         <img src="../img/foto1.jpg" alt="">
-                        <h3>CURSOS</h3>
-                        <p>Todos nuestros cursos sin ningun costo.</p>
+                        <h3>Generación rápida de justificantes personalizados.</h3>
                     </div>
                     <div class="fotos_img">
                         <img src="../img/foto2.jpg" alt="">
-                        <h3>SUBE TUS CREACIONES</h3>
-                        <p>Comparte tu musica con miles de usuarios.</p>
+                        <h3>Interfaz intuitiva y fácil de usar para usuarios de todas las edades.</h3>
+
                     </div>
                     <div class="fotos_img">
                         <img src="../img/foto3.jpg" alt="">
-                        <h3>CHAT CON LA COMUNIDAD</h3>
-                        <p>Chat para hablar sobre musica.</p>
+                        <h3>Servicio seguro y confiable para garantizar la autenticidad de los justificantes.</h3>
                     </div>
                 </div>
             </section>
@@ -104,35 +102,14 @@
                     2smx!4v1687080798320!5m2!1ses!2smx" width="450" height="250" style="border-radius:10px; border: 0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
                 <div class="contenedor-3_text">
-                    <h2>Los mejores cursos</h2>
-                    <p>Los cursos fueron creados por alumnos del Instituto Politecnico Nacional 
-                        de la Escuela Superior de Computo (ESCOM)</p>
-                    <a href="#">Ver cursos</a>
+                <h2>INSTITUTO POLITÉCNICO NACIONAL                    </h2>
+                    <p>D.R. Instituto Politécnico Nacional (IPN). Av. Luis Enrique Erro S/N, Unidad Profesional Adolfo López Mateos, Zacatenco, Delegación Gustavo A. Madero, C.P. 07738, Ciudad de México 2009-2013.
+
+                        Esta página es una obra intelectual protegida por la Ley Federal del Derecho de Autor, puede ser reproducida con fines no lucrativos, siempre y cuando no se mutile, se cite la fuente completa y su dirección electrónica; su uso para otros fines, requiere autorización previa y por escrito de la Dirección General del Instituto.)</p>
+                        <a href="https://www.escom.ipn.mx/">Para más información</a>
                 </div>
             </section>
-            <section class="contenedor-4">
-                <h2 class="contenedor-4_titulo">¿QUÉ QUIERES HACER HOY?</h2>
-                <div class="contenedor-4_bloques">
-                    <div class="bloque">
-                        <h3>CURSOS</h3>
-                        <img src="../img/piano_icono.png" alt="icono_piano">
-                        <p>Ingresa a nuestros cursos de piano que tenemos para ti.</p>
-                        <a href="../Cursos.html">Ir a cursos</a>
-                    </div>
-                    <div class="bloque">
-                        <h3>SUBIR CANCIONES</h3>
-                        <img src="../img/canciones_icono.png" alt="icono_canciones">
-                        <p>Aqui puedes compartir tus creaciones con la comunidad</p>
-                        <a href="Canciones.php">Compartir canciones</a>
-                    </div>
-                    <div class="bloque">
-                        <h3>CHAT</h3>
-                        <img src="../img/chat_icono.png" alt="icono_chat">
-                        <p>Platica con toda la comunidad acerca de tu aprendizaje.</p>
-                        <a href="">Ir al chat</a>
-                    </div>
-                </div>
-            </section>
+           
             <section class="contenedor-5">
                 <div class="footer-text">
                     <div class="box1">

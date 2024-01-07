@@ -94,7 +94,7 @@ button:hover {
 }
 
 .icons i:last-child {
-    color: blue;
+    color: red;
 }
 
 .not-member {
@@ -103,7 +103,7 @@ button:hover {
 }
 
 .not-member a {
-    color: #3838d2; /* Azul */
+    color: red; /* Azul */
     text-decoration: none;
 }
 

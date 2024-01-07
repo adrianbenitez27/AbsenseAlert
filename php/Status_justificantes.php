@@ -48,7 +48,7 @@
             <section class="contenedor-1">
                 <header class="cabecera">
                     <div class="logo">
-                        <img src="../img/logoMusescom4.png" alt="logoMusescom">
+                        <img src="../img/encabezado.png" alt="logoMusescom">
                     </div>
                     <nav class="navegacion">
                         <a href="index.php" class="link">Inicio</a>
@@ -89,26 +89,9 @@
             </section>
             <section class="contenedor-2">
                 <div class="text">
-                    <h2>Nuestro proposito</h2>
-                    <p>En Musescom podras interactuar con usuarios para compartir 
-                        tus creaciones y aprendizaje de los cursos que impartimos.</p>
-                </div>
-                <div class="fotos">
-                    <div class="fotos_img">
-                        <img src="../img/foto1.jpg" alt="">
-                        <h3>CURSOS</h3>
-                        <p>Todos nuestros cursos sin ningun costo.</p>
-                    </div>
-                    <div class="fotos_img">
-                        <img src="../img/foto2.jpg" alt="">
-                        <h3>SUBE TUS CREACIONES</h3>
-                        <p>Comparte tu musica con miles de usuarios.</p>
-                    </div>
-                    <div class="fotos_img">
-                        <img src="../img/foto3.jpg" alt="">
-                        <h3>CHAT CON LA COMUNIDAD</h3>
-                        <p>Chat para hablar sobre musica.</p>
-                    </div>
+                
+                    <p>El estado de tu justificante está siendo procesado. Agradecemos tu paciencia mientras revisamos la información proporcionada. Te notificaremos cualquier cambio en el estado de tu solicitud. Si tienes alguna pregunta o necesitas asistencia, no dudes en ponerte en contacto con nuestro equipo de soporte.</p>
+               
                 </div>
             </section>
             <section class="contenedor-3">
@@ -118,35 +101,14 @@
                     2smx!4v1687080798320!5m2!1ses!2smx" width="450" height="250" style="border-radius:10px; border: 0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
                 <div class="contenedor-3_text">
-                    <h2>Los mejores cursos</h2>
-                    <p>Los cursos fueron creados por alumnos del Instituto Politecnico Nacional 
-                        de la Escuela Superior de Computo (ESCOM)</p>
-                    <a href="#">Ver cursos</a>
+                <h2>INSTITUTO POLITÉCNICO NACIONAL                    </h2>
+                    <p>D.R. Instituto Politécnico Nacional (IPN). Av. Luis Enrique Erro S/N, Unidad Profesional Adolfo López Mateos, Zacatenco, Delegación Gustavo A. Madero, C.P. 07738, Ciudad de México 2009-2013.
+
+                        Esta página es una obra intelectual protegida por la Ley Federal del Derecho de Autor, puede ser reproducida con fines no lucrativos, siempre y cuando no se mutile, se cite la fuente completa y su dirección electrónica; su uso para otros fines, requiere autorización previa y por escrito de la Dirección General del Instituto.)</p>
+                        <a href="https://www.escom.ipn.mx/">Para más información</a>
                 </div>
             </section>
-            <section class="contenedor-4">
-                <h2 class="contenedor-4_titulo">¿QUÉ QUIERES HACER HOY?</h2>
-                <div class="contenedor-4_bloques">
-                    <div class="bloque">
-                        <h3>CURSOS</h3>
-                        <img src="../img/piano_icono.png" alt="icono_piano">
-                        <p>Ingresa a nuestros cursos de piano que tenemos para ti.</p>
-                        <a href="../Cursos.html">Ir a cursos</a>
-                    </div>
-                    <div class="bloque">
-                        <h3>SUBIR CANCIONES</h3>
-                        <img src="../img/canciones_icono.png" alt="icono_canciones">
-                        <p>Aqui puedes compartir tus creaciones con la comunidad</p>
-                        <a href="Canciones.php">Compartir canciones</a>
-                    </div>
-                    <div class="bloque">
-                        <h3>CHAT</h3>
-                        <img src="../img/chat_icono.png" alt="icono_chat">
-                        <p>Platica con toda la comunidad acerca de tu aprendizaje.</p>
-                        <a href="">Ir al chat</a>
-                    </div>
-                </div>
-            </section>
+            
             <section class="contenedor-5">
                 <div class="footer-text">
                     <div class="box1">
