@@ -14,8 +14,6 @@ $fecha_jus = (isset($_POST['fecha_jus'])) ? $_POST['fecha_jus'] : '';
 $razon_ausen = (isset($_POST['razon_ausen'])) ? $_POST['razon_ausen'] : '';
 $statuss = (isset($_POST['statuss'])) ? $_POST['statuss'] : '';
 
-
-
 switch ($opcion) {
     case 1: //Alta
         $consulta = "INSERT INTO datos_justificante (id, statuss) VALUES ('$id', '$statuss')";
@@ -28,16 +26,15 @@ switch ($opcion) {
         $solicitudes = $recordsSolicitudes->fetchAll(PDO::FETCH_ASSOC);
         break;
     case 2: //Modificación
-        $consulta = "UPDATE datos_justificante SET id='$id' boleta='$boleta'  nombre='$nombre' apellido_pat='$apellido_pat' apellido_mat='$apellido_mat' fecha_ini='$fecha_ini' fecha_fin='$fecha_fin' fecha_jus='$fecha_jus' razon_ausen='$razon_ausen' statuss='$statuss' WHERE id = '$id' ";
+        $consulta = "UPDATE datos_justificante SET statuss='$statuss' WHERE id = '$id' ";
         $recordsSolicitudes = $conn->prepare($consulta);
         $recordsSolicitudes->execute();
 
-        $consulta = "SELECT id, boleta, nombre, apellido_pat, apellido_mat, fecha_ini, fecha_fin, fecha_jus, razon_ausen, statuss FROM datos_justificante WHERE id='$id' ";
+        $consulta = "SELECT id, boleta, nombre, apellido_pat, apellido_mat,fecha_ini,fecha_fin,fecha_jus,razon_ausen,statuss FROM datos_justificante WHERE id = '$id'";
         $recordsSolicitudes = $conn->prepare($consulta);
         $recordsSolicitudes->execute();
         $solicitudes = $recordsSolicitudes->fetchAll(PDO::FETCH_ASSOC);
         break;  
 }
-
 print json_encode($solicitudes, JSON_UNESCAPED_UNICODE); //enviar el array final en formato json a JS
 $conn = NULL;
