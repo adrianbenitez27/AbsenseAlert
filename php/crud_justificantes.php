@@ -17,22 +17,22 @@ $opcion = (isset($_POST['opcion'])) ? $_POST['opcion'] : '';
 
 switch ($opcion) {
     case 1: //Alta
-        $consulta = "INSERT INTO datos_justificante (id, statuss) VALUES ('$id', '$statuss')";
-        $recordsSolicitudes = $conn->prepare($consulta);
+        $consulta2 = "INSERT INTO datos_justificante (id, statuss) VALUES ('$id', '$statuss')";
+        $recordsSolicitudes = $conn->prepare($consulta2);
         $recordsSolicitudes->execute();
 
-        $consulta = "SELECT id, statuss FROM datos_justificante ORDER BY id DESC LIMIT 1";
-        $recordsSolicitudes = $conn->prepare($consulta);
+        $consulta2 = "SELECT id, statuss FROM datos_justificante ORDER BY id DESC LIMIT 1";
+        $recordsSolicitudes = $conn->prepare($consulta2);
         $recordsSolicitudes->execute();
         $solicitudes = $recordsSolicitudes->fetchAll(PDO::FETCH_ASSOC);
         break;
     case 2: //Modificación
-        $consulta = "UPDATE datos_justificante SET statuss ='$statuss' WHERE id = '$id' ";
-        $recordsSolicitudes = $conn->prepare($consulta);
+        $consulta2 = "UPDATE datos_justificante SET boleta ='$boleta', nombre ='$nombre', apellido_pat ='$apellido_pat', apellito_mat ='$apellido_mat', fecha_ini ='$fecha_ini', fecha_fin ='$fecha_fin', fecha_just ='$fecha_jus', razon_ausen ='$razon_ausen', statuss ='$statuss' WHERE id = '$id' ";
+        $recordsSolicitudes = $conn->prepare($consulta2);
         $recordsSolicitudes->execute();
 
-        $consulta = "SELECT id, boleta, nombre, apellido_pat, apellito_mat, fecha_ini, fecha_fin, fecha_just, razon_ausen, statuss FROM datos_justificante WHERE id='$id' ";
-        $recordsSolicitudes = $conn->prepare($consulta);
+        $consulta2 = "SELECT id, boleta, nombre, apellido_pat, apellito_mat, fecha_ini, fecha_fin, fecha_just, razon_ausen, statuss FROM datos_justificante WHERE id='$id' ";
+        $recordsSolicitudes = $conn->prepare($consulta2);
         $recordsSolicitudes->execute();
         $solicitudes = $recordsSolicitudes->fetchAll(PDO::FETCH_ASSOC);
         break;

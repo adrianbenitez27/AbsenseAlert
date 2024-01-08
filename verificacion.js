@@ -25,31 +25,31 @@ $(document).ready(function () {
     });
 
 
-    var fila; //capturar la fila para editar o borrar el registro
 
     $("#btnNuevo").click(function () {
         $("#formPersonas").trigger("reset");
         $(".modal-header").css("background-color", "#28a745");
         $(".modal-header").css("color", "white");
         $(".modal-title").text("Nueva Persona");
-        $("#modalCRUD").modal("show");
+        $("#modalJustificante").modal("show");
         // id=null;
         opcion = 1; //alta
     });
+
+    var fila;
 
     //botón VERIFICAR   
     $(document).on("click", ".btnVerificar", function () {
         opcion = 2; //editar
         fila = $(this).closest("tr");
-
         id = parseInt(fila.find('td:eq(0)').text());
         boleta = fila.find('td:eq(1)').text();
         nombre = fila.find('td:eq(2)').text();
         apellido_pat = fila.find('td:eq(3)').text();
         apellido_mat = fila.find('td:eq(4)').text();
-        fecha_ini = parseInt(fila.find('td:eq(5)').text());
-        fecha_fin = parseInt(fila.find('td:eq(6)').text());
-        fecha_jus = parseInt(fila.find('td:eq(7)').text());
+        fecha_ini = fila.find('td:eq(5)').text();
+        fecha_fin = fila.find('td:eq(6)').text();
+        fecha_jus = fila.find('td:eq(7)').text();
         razon_ausen = fila.find('td:eq(8)').text();
         statuss = fila.find('td:eq(9)').text();
 
@@ -67,7 +67,7 @@ $(document).ready(function () {
         $(".modal-header").css("background-color", "#007bff");
         $(".modal-header").css("color", "white");
         $(".modal-title").text("Editar status");
-        $("#modalCRUD").modal("show");
+        $("#modalJustificante").modal("show");
 
     });
 
@@ -105,6 +105,6 @@ $(document).ready(function () {
                 else{tablaJustificantes.row(fila).data([id,boleta,nombre,apellido_pat,apellido_mat,fecha_ini,fecha_fin,fecha_jus,razon_ausen,statuss]).draw();}    
             }
         });
-        $("#modalCRUD").modal("hide");
+        $("#modalJustificante").modal("hide");
     });
 });

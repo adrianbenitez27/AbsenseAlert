@@ -10,8 +10,8 @@ if (!isset($_SESSION['usuario']) || !isset($_SESSION['es_admin']) || $_SESSION['
 }
 
 // Obtener todas las solicitudes
-$consulta = 'SELECT id, boleta, nombre, apellido_pat, apellido_mat,fecha_ini,fecha_fin,fecha_jus,razon_ausen,statuss FROM datos_justificante';
-$recordsSolicitudes = $conn->prepare($consulta);
+$consulta2 = 'SELECT id, boleta, nombre, apellido_pat, apellido_mat, fecha_ini, fecha_fin, fecha_jus, razon_ausen, statuss FROM datos_justificante';
+$recordsSolicitudes = $conn->prepare($consulta2);
 $recordsSolicitudes->execute();
 $solicitudes = $recordsSolicitudes->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -26,10 +26,10 @@ $solicitudes = $recordsSolicitudes->fetchAll(PDO::FETCH_ASSOC);
     <!-- <link rel="stylesheet" href="../css/styleIndex.css"> -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
     <title>Admin Panel</title>
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
 
-    <link rel="stylesheet" type="text/css" href="datatables/datatables.min.js">
-    <link rel="stylesheet" type="text/css" href="datatables/DataTables-1.13.8/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" type="text/css" href="../datatables/datatables.min.js">
+    <link rel="stylesheet" type="text/css" href="../datatables/DataTables-1.13.8/css/dataTables.bootstrap5.min.css">
     <!-- <style>
         table {
             margin: auto; /* Centra la tabla */
@@ -115,7 +115,7 @@ $solicitudes = $recordsSolicitudes->fetchAll(PDO::FETCH_ASSOC);
     </div>
 
 
-    <div class="modal fade" id="modalCRUD" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modalJustificante" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -140,13 +140,13 @@ $solicitudes = $recordsSolicitudes->fetchAll(PDO::FETCH_ASSOC);
     </div>
 
     <!-- jQuery, Popper.js, Bootstrap JS -->
-    <script src="jquery/jquery-3.7.1.min.js"></script>
-    <script src="popper/popper.min.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="../jquery/jquery-3.7.1.min.js"></script>
+    <script src="../popper/popper.min.js"></script>
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
 
     <!-- datatables JS -->
-    <script type="text/javascript" src="datatables/datatables.min.js"></script>
-    <script type="text/javascript" src="js/verificacion.js"></script>
+    <script type="text/javascript" src="../datatables/datatables.min.js"></script>
+    <script type="text/javascript" src="../verificacion.js"></script>
 
 </body>
 </html>
