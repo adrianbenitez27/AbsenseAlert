@@ -40,8 +40,8 @@ $(document).ready(function () {
     //botón VERIFICAR   
     $(document).on("click", ".btnVerificar", function () {
         opcion = 2; //editar
-
         fila = $(this).closest("tr");
+
         id = parseInt(fila.find('td:eq(0)').text());
         boleta = fila.find('td:eq(1)').text();
         nombre = fila.find('td:eq(2)').text();
@@ -71,25 +71,6 @@ $(document).ready(function () {
 
     });
 
-    $(document).on("click", ".btnBorrar", function(){    
-        fila = $(this);
-        id = parseInt($(this).closest("tr").find('td:eq(0)').text());
-        opcion = 3 //borrar
-        var respuesta = confirm("¿Está seguro de eliminar el registro: "+id+"?");
-        if(respuesta){
-            $.ajax({
-                url: "crud_justificantes.php",
-                type: "POST",
-                dataType: "json",
-                data: {opcion:opcion, id:id},
-                success: function(){
-                    tablaJustificantes.row(fila.parents('tr')).remove().draw();
-                }
-            });
-        }   
-    });
-        
-
     $("#formSolicitudes").submit(function (e) {
         e.preventDefault();
         id = $.trim($("#id").val());
@@ -107,7 +88,7 @@ $(document).ready(function () {
             url: "crud_justificantes.php",
             type: "POST",
             dataType: "json",
-            data: {boleta: boleta, nombre: nombre, apellido_pat: apellido_pat, apellido_mat: apellido_mat, fecha_ini: fecha_ini, fecha_fin: fecha_fin, fecha_jus: fecha_jus, razon_ausen: razon_ausen, statuss: statuss, opcion: opcion},
+            data: {id: id, boleta: boleta, nombre: nombre, apellido_pat: apellido_pat, apellido_mat: apellido_mat, fecha_ini: fecha_ini, fecha_fin: fecha_fin, fecha_jus: fecha_jus, razon_ausen: razon_ausen, statuss: statuss, opcion: opcion},
             success: function (data) {
                 console.log(data);
                 id = data[0].id;
