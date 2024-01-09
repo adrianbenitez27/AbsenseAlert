@@ -27,11 +27,11 @@ switch ($opcion) {
         $solicitudes = $recordsSolicitudes->fetchAll(PDO::FETCH_ASSOC);
         break;
     case 2: //Modificación
-        $consulta2 = "UPDATE datos_justificante SET boleta ='$boleta', nombre ='$nombre', apellido_pat ='$apellido_pat', apellito_mat ='$apellido_mat', fecha_ini ='$fecha_ini', fecha_fin ='$fecha_fin', fecha_just ='$fecha_jus', razon_ausen ='$razon_ausen', statuss ='$statuss' WHERE id = '$id' ";
+        $consulta2 = "UPDATE datos_justificante SET boleta ='$boleta', nombre ='$nombre', apellido_pat ='$apellido_pat', apellido_mat ='$apellido_mat', fecha_ini ='$fecha_ini', fecha_fin ='$fecha_fin', fecha_jus ='$fecha_jus', razon_ausen ='$razon_ausen', statuss ='$statuss' WHERE id = '$id' ";
         $recordsSolicitudes = $conn->prepare($consulta2);
         $recordsSolicitudes->execute();
 
-        $consulta2 = "SELECT id, boleta, nombre, apellido_pat, apellito_mat, fecha_ini, fecha_fin, fecha_just, razon_ausen, statuss FROM datos_justificante WHERE id='$id' ";
+        $consulta2 = "SELECT id, boleta, nombre, apellido_pat, apellido_mat, fecha_ini, fecha_fin, fecha_jus, razon_ausen, statuss FROM datos_justificante WHERE id='$id' ";
         $recordsSolicitudes = $conn->prepare($consulta2);
         $recordsSolicitudes->execute();
         $solicitudes = $recordsSolicitudes->fetchAll(PDO::FETCH_ASSOC);

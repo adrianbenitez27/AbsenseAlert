@@ -53,15 +53,6 @@ $(document).ready(function () {
         razon_ausen = fila.find('td:eq(8)').text();
         statuss = fila.find('td:eq(9)').text();
 
-        $("#id").val(id);
-        $("#boleta").val(boleta);
-        $("#nombre").val(nombre);
-        $("#apellido_pat").val(apellido_pat);
-        $("#apellido_mat").val(apellido_mat);
-        $("#fecha_ini").val(fecha_ini);
-        $("#fecha_fin").val(fecha_fin);
-        $("#fecha_jus").val(fecha_jus);
-        $("#razon_ausen").val(razon_ausen);
         $("#statuss").val(statuss);
         
         $(".modal-header").css("background-color", "#007bff");
@@ -73,15 +64,6 @@ $(document).ready(function () {
 
     $("#formSolicitudes").submit(function (e) {
         e.preventDefault();
-        id = $.trim($("#id").val());
-        boleta = $.trim($("#boleta").val());
-        nombre = $.trim($("#nombre").val());
-        apellido_pat = $.trim($("#apellido_pat").val());
-        apellido_mat = $.trim($("#apellido_mat").val());
-        fecha_ini = $.trim($("#fecha_ini").val());
-        fecha_fin = $.trim($("#fecha_fin").val());
-        fecha_jus = $.trim($("#fecha_jus").val());
-        razon_ausen = $.trim($("#razon_ausen").val());
         statuss = $.trim($("#statuss").val());
 
         $.ajax({
@@ -103,6 +85,9 @@ $(document).ready(function () {
                 statuss = data[0].statuss;
                 if(opcion == 1){tablaJustificantes.row.add([id,boleta,nombre,apellido_pat,apellido_mat,fecha_ini,fecha_fin,fecha_jus,razon_ausen,statuss]).draw();}
                 else{tablaJustificantes.row(fila).data([id,boleta,nombre,apellido_pat,apellido_mat,fecha_ini,fecha_fin,fecha_jus,razon_ausen,statuss]).draw();}    
+            },
+            error: function (xhr, status, error) {
+                console.error(error);
             }
         });
         $("#modalJustificante").modal("hide");
