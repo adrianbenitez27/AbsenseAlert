@@ -64,6 +64,7 @@ body {
 
 .banner_textos {
     color: #fff;
+    text-align: center;
 }
 
 .banner_textos h1 {
@@ -73,8 +74,9 @@ body {
 }
 
 .banner_textos p {
-    font-size: 1em;
+    font-size: 1.1em;
     margin-bottom: 60px;
+    padding: 0vh 23vh 0vh 23vh
 }
 
 .banner_textos a {
