@@ -1,8 +1,11 @@
 <?php
     require 'Conexion_base_de_datos.php';
-    $mensaje="";
+    session_start();
 
-    if (!empty($_POST['nombre_usuario']) && !empty($_POST['correo_electronico']) && !empty($_POST['contrasena'])){
+    $code = $_POST['codigo'];
+    $codigo = $_SESSION["codigo"];
+
+    if($code == $codigo){
         $sql = "SELECT COUNT(*) as totalUsuarios FROM usuarios";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
@@ -11,10 +14,10 @@
 
         $sql = "INSERT INTO usuarios (id, boleta, usuario, email, contrasena) VALUES ($totalUsuarios, :boleta, :nombre_usuario, :correo_electronico, :contrasena)";
         $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':nombre_usuario', $_POST['nombre_usuario']);
-        $stmt->bindParam(':boleta', $_POST['boleta']);
-        $stmt->bindParam(':correo_electronico', $_POST['correo_electronico']);
-        $contrasena=hash('sha256', $_POST['contrasena']);
+        $stmt->bindParam(':nombre_usuario', $_SESSION['nombre_usuario']);
+        $stmt->bindParam(':boleta', $_SESSION['boleta']);
+        $stmt->bindParam(':correo_electronico', $_SESSION['correo_electronico']);
+        $contrasena=hash('sha256', $_SESSION['contrasena']);
         $stmt->bindParam(':contrasena',$contrasena);
         if ($stmt->execute()){
             $mensaje = 'Usuario creado correctamente';
@@ -22,6 +25,10 @@
             $mensaje='Ha ocurrido un error';
         }
     }
+    else{
+        echo "<script>alert('Código incorrecto'); window.location='Confirma_cuenta_registro.php'</script>";
+    }
+    $mensaje="";
 ?>
 
 <!DOCTYPE html>
