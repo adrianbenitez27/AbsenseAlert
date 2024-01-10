@@ -53,7 +53,9 @@
                         <?php if(!empty($user)): ?>
                             <a class="link"><?= $user['usuario'] ?></a>
                             <a href="Cerrar_sesion.php" class="link">Cerrar sesion</a>
-                            <a href="Formulario.php" class="link">Solicitar justificante</a> 
+                            <?php if ($_SESSION['es_admin'] == 0): ?>
+                                <a href="Formulario.php" class="link">Solicitar justificante</a> 
+                            <?php endif; ?>
                             <a href="Status_justificantes.php" class="link">Revisar status de justificantes</a>
                             <?php if ($_SESSION['es_admin'] == 1): ?>
                                 <a href="Admin.php" class="link">Control administrador</a>
