@@ -1,34 +1,87 @@
 <?php
-    require 'Conexion_base_de_datos.php';
-    session_start();
+require 'Conexion_base_de_datos.php';
+require 'fdpdf/fpdf.php'; // Asegúrate de proporcionar la ruta correcta a la biblioteca FPDF
+session_start();
 
-    if(isset($_SESSION['usuario_id'])){
-        //$records=$conn->prepare('SELECT id,boleta,usuario,email,contrasena FROM usuarios WHERE id=:id');
-        $records=$conn->prepare('SELECT id,boleta,nombre,apellido_pat,apellido_mat,fecha_nac,genero,curp,
+if (isset($_SESSION['usuario_id'])) {
+    $records = $conn->prepare('SELECT id,boleta,nombre,apellido_pat,apellido_mat,fecha_nac,genero,curp,
         direccion,colonia,estado_proce,codigo_postal,telefono,email,escuela_proce,fecha_ini,fecha_fin,razon_ausen,
         archivo_com_med,statuss,fecha_jus FROM datos_justificante WHERE id=:id');
-        $records->bindParam(':id', $_SESSION['usuario_id']);
-        $records->execute();
-        //$resultado = $records->fetch(PDO::FETCH_ASSOC);
-    }
+    $records->bindParam(':id', $_SESSION['usuario_id']);
+    $records->execute();
+}
+
+// Función para generar PDF con FPDF
+function generarPDF($row)
+{
+    $pdf = new FPDF('P', 'mm', 'Letter'); // Especificamos orientación, unidad y tamaño del papel
+    $pdf->AddPage();
+    $pdf->SetFont('Arial', '', 12);
+
+    // Logo e información del Instituto Politécnico Nacional
+    $pdf->Image('burrito.png', 10, 10, 30);
+    $pdf->SetY(10);
+    $pdf->Cell(0, 10, utf8_decode('Instituto Politécnico Nacional'), 0, 1,'C');
+    $pdf->Cell(0, 10, utf8_decode('Escuela Superior de Cómputo'), 0, 1,'C');
+
+    // Información del Justificante Médico
+    $pdf->SetY(50);
+    $pdf->Cell(0, 10, utf8_decode('Asunto: Justificante Médico'), 0, 1);
+    $pdf->SetY(60);
+    $pdf->Cell(0, 10, 'Querido Profesor', 0, 1);
+    $pdf->SetY(70);
+    $pdf->Cell(0, 10, utf8_decode('Depto Médico'), 0, 1);
+    $pdf->SetY(80);
+    $pdf->Cell(0, 10, 'Presente:', 0, 1);
+
+    // Datos del alumno
+    $pdf->SetY(100);
+    $pdf->Cell(0, 10, 'Nombre: ' . $row['nombre'] . ' ' . $row['apellido_pat'] . ' ' . $row['apellido_mat'], 0, 1);
+    $pdf->Cell(0, 10, 'Boleta: ' . $row['boleta'], 0, 1);
+
+    // Contenido del justificante
+$pdf->SetY(120);
+$pdf->MultiCell(0, 10, utf8_decode('Estimado Profesor,
+
+Por la presente, justifico la ausencia del alumno ' . $row['nombre'] . ' ' . $row['apellido_pat'] . ' ' . $row['apellido_mat'] . ', con boleta ' . $row['boleta'] . ', debido a su ausencia planificada desde el ' . $row['fecha_ini'] . ' hasta el ' . $row['fecha_fin'] . '. Nuestro compromiso con la excelencia académica y respeto a las normativas nos motiva a informar detalladamente los motivos de la ausencia.
+
+Agradecemos su comprensión.
+
+Atentamente,
+
+[Firma del alumno]'));
+
+    // Fecha en la esquina inferior derecha
+    $pdf->SetY(245);
+    $pdf->SetX(-40);
+    $pdf->Cell(0, 10, 'Fecha: ' . $row['fecha_ini'], 0, 1, 'R');
+
+    // Guarda el PDF en un archivo
+    $pdf->Output('justificante_aprobado.pdf', 'F');
+}
+
+
+
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../css/styleIndex.css">
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
-        <title>Status justificantes</title>
-        <style>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/styleIndex.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+    <title>Status justificantes</title>
+    <style>
         table {
             border-collapse: collapse;
             width: 80%;
             margin: 20px auto;
         }
 
-        th, td {
+        th,
+        td {
             border: 1px solid #dddddd;
             text-align: left;
             padding: 8px;
@@ -37,56 +90,61 @@
         th {
             background-color: #f2f2f2;
         }
+
         .scrollable {
             max-height: 200px;
             overflow-y: auto;
         }
-        </style>
-    </head>
-    <body>
-        <main class="main">
-            <section class="contenedor-1">
-                <header class="cabecera">
-                    <div class="logo">
-                        <img src="../img/encabezado.png" alt="logoMusescom">
-                    </div>
-                    <nav class="navegacion">
-                        <a href="index.php" class="link">Inicio</a>
-                        <a class="link"><?= $_SESSION['usuario'] ?></a>
-                        <a href="Cerrar_sesion.php" class="link">Cerrar sesion</a>
-                        <a href="Formulario.php" class="link">Solicitar justificante</a>
-                        <a href="Status_justificantes.php" class="link">Revisar status de justificantes</a>
-                    </nav>
-                </header>
-                <h1>Status de justificantes médicos</h1>
-                <?php
-                    echo '<div class="scrollable">';
-                        echo '<table border="1">';
-                            echo '<tr>';
-                                echo '<th>Contador</th>';
-                                echo '<th>Fecha</th>';
-                                echo '<th>Status</th>';
-                                echo '<th>Archivo</th>';
-                            echo '</tr>';
-                            $cont = 1;
-                            while ($row = $records->fetch(PDO::FETCH_ASSOC)) {
-                                echo '<tr>';
-                                    echo '<td>' . $cont . '</td>';
-                                    echo '<td>' . $row['fecha_jus'] . '</td>';
-                                    echo '<td>' . $row['statuss'] . '</td>';
-                                    if($row['statuss'] == "Pendiente"){
-                                        echo '<td>' . 'Aún no se ha revisado tu información' . '</td>';
-                                    }
-                                    else if($row['statuss'] == "Rechazado"){
-                                        echo '<td>' . 'Tu información no cumplió las especificaciones' . '</td>';
-                                    }
-                                echo '</tr>';
-                                $cont++;
-                            }
-                        echo '</table>';
-                    echo '</div>';
-                ?>
-            </section>
+    </style>
+</head>
+
+<body>
+    <main class="main">
+        <section class="contenedor-1">
+            <header class="cabecera">
+                <div class="logo">
+                    <img src="../img/encabezado.png" alt="logoMusescom">
+                </div>
+                <nav class="navegacion">
+                    <a href="index.php" class="link">Inicio</a>
+                    <a class="link"><?= $_SESSION['usuario'] ?></a>
+                    <a href="Cerrar_sesion.php" class="link">Cerrar sesion</a>
+                    <a href="Formulario.php" class="link">Solicitar justificante</a>
+                    <a href="Status_justificantes.php" class="link">Revisar status de justificantes</a>
+                </nav>
+            </header>
+            <h1>Status de justificantes médicos</h1>
+            <?php
+            echo '<div class="scrollable">';
+            echo '<table border="1">';
+            echo '<tr>';
+            echo '<th>Contador</th>';
+            echo '<th>Fecha</th>';
+            echo '<th>Status</th>';
+            echo '<th>Archivo</th>';
+            echo '</tr>';
+            $cont = 1;
+            while ($row = $records->fetch(PDO::FETCH_ASSOC)) {
+                echo '<tr>';
+                echo '<td>' . $cont . '</td>';
+                echo '<td>' . $row['fecha_jus'] . '</td>';
+                echo '<td>' . $row['statuss'] . '</td>';
+                if ($row['statuss'] == "Pendiente") {
+                    echo '<td>' . 'Aún no se ha revisado tu información' . '</td>';
+                } else if ($row['statuss'] == "Rechazado") {
+                    echo '<td>' . 'Tu información no cumplió las especificaciones' . '</td>';
+                } else if ($row['statuss'] == "Aprobado") {
+                    // Llama a la función para generar el PDF con el contenido deseado
+                    generarPDF($row);
+                    echo '<td>' . 'Justificante aprobado - <a href="justificante_aprobado.pdf" target="_blank">Descargar PDF</a>' . '</td>';
+                }
+                echo '</tr>';
+                $cont++;
+            }
+            echo '</table>';
+            echo '</div>';
+            ?>
+        </section>
             <section class="contenedor-2">
                 <div class="text">
                 
