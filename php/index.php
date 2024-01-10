@@ -36,7 +36,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../css/styleIndex.css">
+        <link rel="stylesheet" href="../css/Index.css">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
         <title>Inicio AbsenseAlert</title>
     </head>
@@ -45,7 +45,7 @@
             <section class="contenedor-1">
                 <header class="cabecera">
                     <div class="logo">
-                        <img src="../img/encabezado.png" alt="logoMusescom">
+                        <img src="../img/LogoBurrito1.jpg" alt="logoBurrito">
                     </div>
                     <nav class="navegacion">
                         <a href="index.php" class="link">Inicio</a>
@@ -53,7 +53,9 @@
                         <?php if(!empty($user)): ?>
                             <a class="link"><?= $user['usuario'] ?></a>
                             <a href="Cerrar_sesion.php" class="link">Cerrar sesion</a>
-                            <a href="Formulario.php" class="link">Solicitar justificante</a> 
+                            <?php if ($_SESSION['es_admin'] == 0): ?>
+                                <a href="Formulario.php" class="link">Solicitar justificante</a> 
+                            <?php endif; ?>
                             <a href="Status_justificantes.php" class="link">Revisar status de justificantes</a>
                             <?php if ($_SESSION['es_admin'] == 1): ?>
                                 <a href="Admin.php" class="link">Control administrador</a>
