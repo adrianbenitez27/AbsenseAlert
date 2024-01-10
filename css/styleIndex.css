@@ -27,9 +27,8 @@ body {
 }
 
 .logo img {
-    width: 400px;
-    height: 40vh;
-    height: auto;
+    width: 100px;
+    height: 20vh;
 }
 
 .navegacion {
