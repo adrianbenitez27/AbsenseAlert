@@ -3,6 +3,8 @@ require 'Conexion_base_de_datos.php';
 require 'fdpdf/fpdf.php'; // Asegúrate de proporcionar la ruta correcta a la biblioteca FPDF
 session_start();
 
+$enlace_just = '';
+
 if (isset($_SESSION['usuario_id'])) {
     $records = $conn->prepare('SELECT id,boleta,nombre,apellido_pat,apellido_mat,fecha_nac,genero,curp,
         direccion,colonia,estado_proce,codigo_postal,telefono,email,escuela_proce,fecha_ini,fecha_fin,razon_ausen,
@@ -12,14 +14,14 @@ if (isset($_SESSION['usuario_id'])) {
 }
 
 // Función para generar PDF con FPDF
-function generarPDF($row)
+function generarPDF($row, $cont)
 {
     $pdf = new FPDF('P', 'mm', 'Letter'); // Especificamos orientación, unidad y tamaño del papel
     $pdf->AddPage();
     $pdf->SetFont('Arial', '', 12);
 
     // Logo e información del Instituto Politécnico Nacional
-    $pdf->Image('burrito.png', 10, 10, 30);
+    $pdf->Image('../img/burrito.png', 10, 10, 30);
     $pdf->SetY(10);
     $pdf->Cell(0, 10, utf8_decode('Instituto Politécnico Nacional'), 0, 1,'C');
     $pdf->Cell(0, 10, utf8_decode('Escuela Superior de Cómputo'), 0, 1,'C');
@@ -57,10 +59,10 @@ Atentamente,
     $pdf->Cell(0, 10, 'Fecha: ' . $row['fecha_ini'], 0, 1, 'R');
 
     // Guarda el PDF en un archivo
-    $pdf->Output('justificante_aprobado.pdf', 'F');
+    $pdf->Output('../justificantes_aprobados/' . $_SESSION['usuario_id'] . '-' . $cont . '-justificante_aprobado.pdf', 'F');
+
+    return '../justificantes_aprobados/' . $_SESSION['usuario_id'] . '-' . $cont . '-justificante_aprobado.pdf';
 }
-
-
 
 ?>
 
@@ -134,9 +136,8 @@ Atentamente,
                 } else if ($row['statuss'] == "Rechazado") {
                     echo '<td>' . 'Tu información no cumplió las especificaciones' . '</td>';
                 } else if ($row['statuss'] == "Aprobado") {
-                    // Llama a la función para generar el PDF con el contenido deseado
-                    generarPDF($row);
-                    echo '<td>' . 'Justificante aprobado - <a href="justificante_aprobado.pdf" target="_blank">Descargar PDF</a>' . '</td>';
+                    $enlace_just = generarPDF($row, $cont);
+                    echo '<td>Justificante aprobado - <a href="' . $enlace_just . '" target="_blank">Descargar PDF</a></td>';
                 }
                 echo '</tr>';
                 $cont++;
